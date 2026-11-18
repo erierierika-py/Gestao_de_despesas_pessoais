@@ -45,3 +45,35 @@ def mostrar_backups():
     print("Backups existentes:")
     for i, nome in enumerate(backups, start=1):
         print(f"  {i}. {nome}")
+
+
+def restaurar_backup():
+    """Restaura um backup escolhido pelo utilizador, com confirmação.
+
+    Substitui o ficheiro de dados atual pelo backup escolhido.
+    """
+    backups = listar_backups()
+    if not backups:
+        print("Não existem backups para restaurar.")
+        return
+
+    mostrar_backups()
+    escolha = input("Número do backup a restaurar (Enter para cancelar): ").strip()
+    if not escolha:
+        print("Operação cancelada.")
+        return
+    if not escolha.isdigit() or not (1 <= int(escolha) <= len(backups)):
+        print("Escolha inválida.")
+        return
+
+    nome = backups[int(escolha) - 1]
+    confirmacao = input(
+        f"Isto vai substituir os dados atuais por '{nome}'. Continuar? (s/n): "
+    ).strip().lower()
+    if confirmacao != "s":
+        print("Operação cancelada.")
+        return
+
+    os.makedirs(os.path.dirname(dados.FICHEIRO), exist_ok=True)
+    shutil.copy(os.path.join(pasta_backups, nome), dados.FICHEIRO)
+    print("Backup restaurado com sucesso.")
