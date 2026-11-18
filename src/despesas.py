@@ -1,63 +1,75 @@
-# Issue 1 
-import json
-from pathlib import Path
-from datetime import datetime
 
+from datetime import datetime
+from .dados import carregar, guardar, proximo_id
+
+
+# Issue 1 
 
 def adicionar_despesa():
-    print("\n--- Adicionar Despesa --")
+    print("\n Adicionar Despesa")
 
     descricao = input("Descrição da despesa: ").strip()
     if descricao == "":
-        print("Tens de escrever uma descrição")
+        print("Falta uma descrição")
         return
 
     try:
-        valor = float(input("Valor da despesa: ").replace(",", "."))
+        valor = float(input("Valor da despesa (€): ").replace(",", "."))
+
         if valor <= 0:
-            print("O valor tem de ser maior que zero")
+            print("O numero tem de ser maior que zero")
             return
+
+
     except ValueError:
-        print("O valor introduzido não e valido")
+        print("Valor invalido")
         return
+
+    
 
     categoria = input("Categoria: ").strip()
     if categoria == "":
-        print("Tens de indicar uma categoria")
+        print("Indica uma categoria")
         return
 
     data = input("Data (DD-MM-AAAA): ").strip()
     try:
         datetime.strptime(data, "%d-%m-%Y")
     except ValueError:
-        print("A data nao e valida")
+        print("A data invalida")
         return
 
-    caminho = Path(__file__).resolve().parent.parent / "data" / "despesas.json"
-
-    if caminho.exists():
-        with open(caminho, "r", encoding="utf-8") as ficheiro:
-            despesas = json.load(ficheiro)
-    else:
-        despesas = []
+    dados = carregar()
 
     nova_despesa = {
-        "id": max((d["id"] for d in despesas), default=0) + 1,
+        "id": proximo_id(dados["despesas"]),
         "descricao": descricao,
         "valor": round(valor, 2),
         "categoria": categoria,
         "data": data
     }
 
-    despesas.append(nova_despesa)
+    dados["despesas"].append(nova_despesa)
+    guardar(dados)
 
-    caminho.parent.mkdir(exist_ok=True)
-
-    with open(caminho, "w", encoding="utf-8") as ficheiro:
-        json.dump(despesas, ficheiro, indent=4, ensure_ascii=False)
-
-    print("\nRegisto adicionado!")
+    print("\nRegisto adicionado")
 
 
-if __name__ == "__main__":
-    adicionar_despesa()
+# Issue 2 
+
+def consultar_despesas():
+    dados = carregar()
+    despesas = dados["despesas"]
+
+    print("\nConsultar Despesas")
+
+    if len(despesas) == 0:
+        print("Ainda não tem despesas ")
+        return
+
+    for despesa in despesas:
+        print("ID:", despesa["id"])
+        print("Descrição:", despesa["descricao"])
+        print("Valor:", f"{float(despesa['valor']):.2f}", "€")
+        print("Categoria:", despesa["categoria"])
+        print("Data:", despesa["data"])
