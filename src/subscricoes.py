@@ -78,3 +78,50 @@ def total_mensal(subscricoes):
     """
     return sum(s["valor"] for s in subscricoes)
 
+
+def listar_subscricoes():
+    """Mostra todas as subscrições e o total mensal."""
+    d = dados.carregar()
+    lista = d["subscricoes"]
+    if not lista:
+        print("Não existem subscrições registadas.")
+        return
+
+    print(f"{'ID':<4}{'Nome':<22}{'Valor':>9}  {'Categoria':<15}{'Dia':>4}")
+    print("-" * 56)
+    for s in lista:
+        print(f"{s['id']:<4}{s['nome']:<22}{s['valor']:>8.2f}€  {s['categoria']:<15}{s['dia']:>4}")
+    print("-" * 56)
+    print(f"Total mensal: {total_mensal(lista):.2f}€")
+
+
+def remover_subscricao():
+    """Remove uma subscrição escolhida pelo id, com confirmação."""
+    d = dados.carregar()
+    if not d["subscricoes"]:
+        print("Não existem subscrições para remover.")
+        return
+
+    listar_subscricoes()
+    escolha = input("Id da subscrição a remover (Enter para cancelar): ").strip()
+    if not escolha:
+        print("Operação cancelada.")
+        return
+    if not escolha.isdigit():
+        print("Id inválido.")
+        return
+
+    alvo = next((s for s in d["subscricoes"] if s["id"] == int(escolha)), None)
+    if alvo is None:
+        print("Não existe nenhuma subscrição com esse id.")
+        return
+
+    confirmacao = input(f"Remover '{alvo['nome']}'? (s/n): ").strip().lower()
+    if confirmacao != "s":
+        print("Operação cancelada.")
+        return
+
+    d["subscricoes"].remove(alvo)
+    dados.guardar(d)
+    print("Subscrição removida.")
+
