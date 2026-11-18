@@ -27,11 +27,11 @@ def main():
             editar_despesa()
 
         elif opcao == "0":
-            print("Ate a proxima")
+            print("Até à próxima")
             break
 
         else:
-            print("Opção invalida")
+            print("Opção inválida")
 
 
 if __name__ == "__main__":
