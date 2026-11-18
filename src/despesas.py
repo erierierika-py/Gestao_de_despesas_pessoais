@@ -3,10 +3,10 @@ from datetime import datetime
 from .dados import carregar, guardar, proximo_id
 
 
-# Issue 1 
+# Issue 1
 
 def adicionar_despesa():
-    print("\n Adicionar Despesa")
+    print("\nAdicionar Despesa")
 
     descricao = input("Descrição da despesa: ").strip()
     if descricao == "":
@@ -20,12 +20,9 @@ def adicionar_despesa():
             print("O numero tem de ser maior que zero")
             return
 
-
     except ValueError:
         print("Valor invalido")
         return
-
-    
 
     categoria = input("Categoria: ").strip()
     if categoria == "":
@@ -33,10 +30,11 @@ def adicionar_despesa():
         return
 
     data = input("Data (DD-MM-AAAA): ").strip()
+
     try:
         datetime.strptime(data, "%d-%m-%Y")
     except ValueError:
-        print("A data invalida")
+        print("A data não é válida")
         return
 
     dados = carregar()
@@ -52,10 +50,10 @@ def adicionar_despesa():
     dados["despesas"].append(nova_despesa)
     guardar(dados)
 
-    print("\nRegisto adicionado")
+    print("\nRegisto adicionado!")
 
 
-# Issue 2 
+# Issue 2
 
 def consultar_despesas():
     dados = carregar()
@@ -64,12 +62,86 @@ def consultar_despesas():
     print("\nConsultar Despesas")
 
     if len(despesas) == 0:
-        print("Ainda não tem despesas ")
+        print("Ainda não existem despesas")
         return
 
     for despesa in despesas:
-        print("ID:", despesa["id"])
+        print("\nID:", despesa["id"])
         print("Descrição:", despesa["descricao"])
         print("Valor:", f"{float(despesa['valor']):.2f}", "€")
         print("Categoria:", despesa["categoria"])
         print("Data:", despesa["data"])
+
+
+# Issue 3
+
+def editar_despesa():
+    dados = carregar()
+    despesas = dados["despesas"]
+
+    print("\nEditar Despesa")
+
+    if len(despesas) == 0:
+        print("Ainda não existem despesas")
+        return
+
+    for despesa in despesas:
+        print("ID:", despesa["id"], "-", despesa["descricao"])
+
+    try:
+        id_despesa = int(input("\nID da despesa que queres editar: "))
+    except ValueError:
+        print("ID inválido")
+        return
+
+    for despesa in despesas:
+        if despesa["id"] == id_despesa:
+
+            print("\nDeixa vazio para manter o valor atual")
+
+            descricao = input("Nova descrição: ").strip()
+
+            valor_texto = input("Novo valor (€): ").replace(",", ".")
+
+            if valor_texto != "":
+                try:
+                    valor = float(valor_texto)
+
+                    if valor <= 0:
+                        print("O numero tem de ser maior que zero")
+                        return
+
+                except ValueError:
+                    print("Valor invalido")
+                    return
+
+            categoria = input("Nova categoria: ").strip()
+
+            data = input("Nova data (DD-MM-AAAA): ").strip()
+
+            if data != "":
+                try:
+                    datetime.strptime(data, "%d-%m-%Y")
+                except ValueError:
+                    print("A data é inválida")
+                    return
+
+            if descricao != "":
+                despesa["descricao"] = descricao
+
+            if valor_texto != "":
+                despesa["valor"] = round(valor, 2)
+
+            if categoria != "":
+                despesa["categoria"] = categoria
+
+            if data != "":
+                despesa["data"] = data
+
+            guardar(dados)
+
+            print("\nDespesa editada com sucesso!")
+            return
+
+    print("Não existe nenhuma despesa com esse ID")
+
