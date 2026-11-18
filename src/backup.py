@@ -23,3 +23,25 @@ def criar_backup():
     destino = os.path.join(pasta_backups, nome)
     shutil.copy(dados.FICHEIRO, destino)
     print(f"Backup criado em: {destino}")
+
+
+def listar_backups():
+    """Devolve a lista de backups existentes, do mais recente para o mais antigo.
+    Devolve:
+        list[str]: Nomes dos ficheiros de backup.
+    """
+    if not os.path.isdir(pasta_backups):
+        return []
+    ficheiros = [f for f in os.listdir(pasta_backups) if f.endswith(".json")]
+    return sorted(ficheiros, reverse=True)
+
+
+def mostrar_backups():
+    """Mostra na consola os backups existentes, numerados."""
+    backups = listar_backups()
+    if not backups:
+        print("Não existem backups.")
+        return
+    print("Backups existentes:")
+    for i, nome in enumerate(backups, start=1):
+        print(f"  {i}. {nome}")
