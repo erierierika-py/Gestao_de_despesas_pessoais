@@ -30,6 +30,12 @@ def main():
         elif opcao =="4":
             eliminar_despesa()
 
+        elif opcao == "6":
+            saldo.menu_saldo()
+
+        elif opcao == "7":
+            poupanca.menu_poupanca()
+            
         elif opcao == "0":
             print("Até à próxima")
             break
