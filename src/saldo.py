@@ -1,8 +1,8 @@
 """Cálculos de saldo, totais mensais e histórico financeiro."""
 
 from datetime import datetime
-
 from src import dados
+from src.poupanca import calcular_poupado
 
 # Aceita os dois formatos usados no grupo, até se decidir um só.
 FORMATOS_DATA = ("%Y-%m-%d", "%d-%m-%Y")
@@ -108,3 +108,53 @@ def consultar_resumo_mensal():
     print(f"Saldo:       {linha['saldo']:.2f}€")
     if linha["saldo"] < 0:
         print("Atenção: o saldo deste mês é negativo.")
+
+
+def mostrar_saldo_total():
+    """Mostra o saldo total (rendimentos menos despesas de todos os meses).
+
+    Usa poupanca.calcular_poupado para não duplicar o cálculo.
+    """
+    base = dados.carregar()
+    saldo = calcular_poupado(base)
+    print(f"\nSaldo disponível: {saldo:.2f}€")
+    if saldo < 0:
+        print("Atenção: gastaste mais do que recebeste.")
+
+
+def mostrar_historico():
+    """Mostra uma linha por mês com rendimentos, despesas e saldo."""
+    base = dados.carregar()
+    resumo = resumo_mensal(base["rendimentos"], base["despesas"])
+    if not resumo:
+        print("Ainda não existem registos para mostrar.")
+        return
+
+    print(f"\n{'Mês':<9}{'Rendimentos':>13}{'Despesas':>11}{'Saldo':>11}")
+    print("-" * 44)
+    for linha in resumo:
+        print(f"{linha['mes']:<9}{linha['rendimentos']:>12.2f}€"
+              f"{linha['despesas']:>10.2f}€{linha['saldo']:>10.2f}€")
+
+
+def menu_saldo():
+    """Mostra o submenu de saldo e histórico e executa a opção escolhida."""
+    while True:
+        print("\n*** SALDO E HISTÓRICO ***")
+        print("1. Saldo total")
+        print("2. Resumo de um mês")
+        print("3. Histórico mês a mês")
+        print("0. Voltar")
+
+        opcao = input("Escolhe uma opção: ").strip()
+
+        if opcao == "1":
+            mostrar_saldo_total()
+        elif opcao == "2":
+            consultar_resumo_mensal()
+        elif opcao == "3":
+            mostrar_historico()
+        elif opcao == "0":
+            break
+        else:
+            print("Opção inválida. Escolhe 1, 2, 3 ou 0.")
