@@ -31,3 +31,18 @@ def definir_objetivo():
     d["poupanca"]["objetivo"] = valor
     dados.guardar(d)
     print(f"Objetivo definido: {valor:.2f}€")
+
+
+def calcular_poupado(d):
+    """Calcula o valor poupado: total de rendimentos menos total de despesas.
+
+    Args:
+        d: Dicionário completo de dados (resultado de dados.carregar()).
+
+    Devolve:
+        float: Valor poupado. Pode ser negativo se gastaste mais do que recebeste.
+    """
+    total_rendimentos = sum(r["valor"] for r in d["rendimentos"])
+    total_despesas = sum(x["valor"] for x in d["despesas"])
+    return total_rendimentos - total_despesas
+
