@@ -79,3 +79,40 @@ def filtrar_por_categoria(despesas, categoria):
     """
     categoria = categoria.strip().lower()
     return [x for x in despesas if x["categoria"].lower() == categoria]
+
+
+def menu_filtrar():
+    """Mostra as categorias, pede uma escolha e lista as despesas dessa categoria.
+
+    No fim mostra o total gasto na categoria. Se a escolha for inválida
+    ou a categoria não tiver despesas, avisa o utilizador.
+    """
+    d = dados.carregar()
+
+    if not d["categorias"]:
+        print("Ainda não existem categorias registadas.")
+        return
+
+    print("Categorias:")
+    for i, nome in enumerate(d["categorias"], start=1):
+        print(f"  {i}. {nome}")
+
+    escolha = input("Número da categoria (Enter para cancelar): ").strip()
+    if not escolha:
+        print("Operação cancelada.")
+        return
+    if not escolha.isdigit() or not (1 <= int(escolha) <= len(d["categorias"])):
+        print("Escolha inválida.")
+        return
+
+    categoria = d["categorias"][int(escolha) - 1]
+    resultados = filtrar_por_categoria(d["despesas"], categoria)
+
+    if not resultados:
+        print(f"Não há despesas na categoria '{categoria}'.")
+        return
+
+    print(f"\nDespesas em '{categoria}':")
+    mostrar_despesas(resultados)
+    total = sum(x["valor"] for x in resultados)
+    print(f"Total gasto em '{categoria}': {total:.2f}€")
