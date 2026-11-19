@@ -61,5 +61,21 @@ def menu_pesquisar():
         return
 
     print(f"\n{len(resultados)} resultado(s) para '{texto}':")
-    
+
     mostrar_despesas(resultados)
+
+
+def filtrar_por_categoria(despesas, categoria):
+    """Devolve as despesas que pertencem à categoria indicada.
+
+    A comparação não distingue maiúsculas de minúsculas.
+
+    Args:
+        despesas (list[dict]): Lista de despesas.
+        categoria (str): Nome da categoria a filtrar.
+
+    Devolve:
+        list[dict]: Despesas dessa categoria (pode ser uma lista vazia).
+    """
+    categoria = categoria.strip().lower()
+    return [x for x in despesas if x["categoria"].lower() == categoria]
