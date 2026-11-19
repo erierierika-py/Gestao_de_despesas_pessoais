@@ -67,7 +67,6 @@ def mostrar_progresso():
     print(f"Poupado: {poupado:.2f}€ de {objetivo:.2f}€ ({percentagem:.0f}%)")
 
     blocos = int(min(percentagem, 100) / 5)
-    print("[" + "#" * blocos + "-" * (20 - blocos) + "]")
 
     if poupado < 0:
         print(f"Atenção: gastaste mais do que recebeste ({-poupado:.2f}€ a mais).")
@@ -75,4 +74,25 @@ def mostrar_progresso():
         print(f"Faltam {falta:.2f}€ para atingir o objetivo.")
     else:
         print("Parabéns, atingiste o teu objetivo!")
+
+
+def menu_poupanca():
+    """Mostra o submenu de poupança e executa a opção escolhida."""
+
+    while True:
+        print("\n*** OBJETIVO DE POUPANÇA ***")
+        print("1. Ver progresso")
+        print("2. Definir/alterar objetivo")
+        print("0. Voltar")
+
+        opcao = input("Escolhe uma opção: ").strip()
+
+        if opcao == "1":
+            mostrar_progresso()
+        elif opcao == "2":
+            definir_objetivo()
+        elif opcao == "0":
+            break
+        else:
+            print("Opção inválida. Escolhe 1, 2 ou 0.")
 
