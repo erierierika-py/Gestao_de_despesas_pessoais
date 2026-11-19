@@ -1,63 +1,182 @@
-# Issue 1 
-import json
-from pathlib import Path
-from datetime import datetime
 
+from datetime import datetime
+from .dados import carregar, guardar, proximo_id
+
+
+# Issue 1
 
 def adicionar_despesa():
-    print("\n--- Adicionar Despesa --")
+    print("\nAdicionar Despesa")
 
     descricao = input("Descrição da despesa: ").strip()
     if descricao == "":
-        print("Tens de escrever uma descrição")
+        print("Falta uma descrição")
         return
 
     try:
-        valor = float(input("Valor da despesa: ").replace(",", "."))
+        valor = float(input("Valor da despesa (€): ").replace(",", "."))
+
         if valor <= 0:
-            print("O valor tem de ser maior que zero")
+            print("O numero tem de ser maior que zero")
             return
+
     except ValueError:
-        print("O valor introduzido não e valido")
+        print("Valor invalido")
         return
 
     categoria = input("Categoria: ").strip()
     if categoria == "":
-        print("Tens de indicar uma categoria")
+        print("Indica uma categoria")
         return
 
     data = input("Data (DD-MM-AAAA): ").strip()
+
     try:
         datetime.strptime(data, "%d-%m-%Y")
     except ValueError:
-        print("A data nao e valida")
+        print("A data não é válida")
         return
 
-    caminho = Path(__file__).resolve().parent.parent / "data" / "despesas.json"
-
-    if caminho.exists():
-        with open(caminho, "r", encoding="utf-8") as ficheiro:
-            despesas = json.load(ficheiro)
-    else:
-        despesas = []
+    dados = carregar()
 
     nova_despesa = {
-        "id": max((d["id"] for d in despesas), default=0) + 1,
+        "id": proximo_id(dados["despesas"]),
         "descricao": descricao,
         "valor": round(valor, 2),
         "categoria": categoria,
         "data": data
     }
 
-    despesas.append(nova_despesa)
-
-    caminho.parent.mkdir(exist_ok=True)
-
-    with open(caminho, "w", encoding="utf-8") as ficheiro:
-        json.dump(despesas, ficheiro, indent=4, ensure_ascii=False)
+    dados["despesas"].append(nova_despesa)
+    guardar(dados)
 
     print("\nRegisto adicionado!")
 
 
-if __name__ == "__main__":
-    adicionar_despesa()
+# Issue 2
+
+def consultar_despesas():
+    dados = carregar()
+    despesas = dados["despesas"]
+
+    print("\nConsultar Despesas")
+
+    if len(despesas) == 0:
+        print("Ainda não existem despesas")
+        return
+
+    for despesa in despesas:
+        print("\nID:", despesa["id"])
+        print("Descrição:", despesa["descricao"])
+        print("Valor:", f"{float(despesa['valor']):.2f}", "€")
+        print("Categoria:", despesa["categoria"])
+        print("Data:", despesa["data"])
+
+
+# Issue 3
+
+def editar_despesa():
+    dados = carregar()
+    despesas = dados["despesas"]
+
+    print("\nEditar Despesa")
+
+    if len(despesas) == 0:
+        print("Ainda não existem despesas")
+        return
+
+    for despesa in despesas:
+        print("ID:", despesa["id"], "-", despesa["descricao"])
+
+    try:
+        id_despesa = int(input("\nID da despesa que queres editar: "))
+    except ValueError:
+        print("ID inválido")
+        return
+
+    for despesa in despesas:
+        if despesa["id"] == id_despesa:
+
+            print("\nDeixa vazio para manter o valor atual")
+
+            descricao = input("Nova descrição: ").strip()
+
+            valor_texto = input("Novo valor (€): ").replace(",", ".")
+
+            if valor_texto != "":
+                try:
+                    valor = float(valor_texto)
+
+                    if valor <= 0:
+                        print("O numero tem de ser maior que zero")
+                        return
+
+                except ValueError:
+                    print("Valor invalido")
+                    return
+
+            categoria = input("Nova categoria: ").strip()
+
+            data = input("Nova data (DD-MM-AAAA): ").strip()
+
+            if data != "":
+                try:
+                    datetime.strptime(data, "%d-%m-%Y")
+                except ValueError:
+                    print("A data é inválida")
+                    return
+
+            if descricao != "":
+                despesa["descricao"] = descricao
+
+            if valor_texto != "":
+                despesa["valor"] = round(valor, 2)
+
+            if categoria != "":
+                despesa["categoria"] = categoria
+
+            if data != "":
+                despesa["data"] = data
+
+            guardar(dados)
+
+            print("\nDespesa editada com sucesso!")
+            return
+
+    print("Não existe nenhuma despesa com esse ID")
+
+
+# Issue 4
+
+def eliminar_despesa():
+    dados = carregar()
+    despesas = dados["despesas"]
+
+    print("\nEliminar Despesa")
+
+    if len(despesas) == 0:
+        print("Ainda não existem despesas")
+        return
+
+    for despesa in despesas:
+        print("ID:", despesa["id"], "-", despesa["descricao"])
+
+    try:
+        id_despesa = int(input("\nID da despesa que queres eliminar: "))
+    except ValueError:
+        print("ID invalido")
+        return
+
+    for despesa in despesas:
+        if despesa["id"] == id_despesa:
+
+            print("\nDescrição:", despesa["descricao"])
+            print("Valor:", despesa["valor"], "€")
+
+            despesas.remove(despesa)
+            guardar(dados)
+
+            print("\nDespesa eliminada")
+            return
+
+    print("Essa despesa nao e real")
