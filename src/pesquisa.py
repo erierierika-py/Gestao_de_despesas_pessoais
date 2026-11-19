@@ -116,3 +116,25 @@ def menu_filtrar():
     mostrar_despesas(resultados)
     total = sum(x["valor"] for x in resultados)
     print(f"Total gasto em '{categoria}': {total:.2f}€")
+
+
+def gasto_por_categoria(despesas):
+    """Soma as despesas de cada categoria.
+
+    Args:
+        despesas (list[dict]): Lista de despesas.
+
+    Devolve:
+        dict: Categoria -> total gasto, ordenado da categoria com mais
+            gastos para a com menos.
+    """
+    totais = {}
+    for x in despesas:
+        categoria = x["categoria"]
+        totais[categoria] = totais.get(categoria, 0) + x["valor"]
+
+    def total_do_par(par):
+        return par[1]
+
+    ordenado = sorted(totais.items(), key=total_do_par, reverse=True)
+    return dict(ordenado)
