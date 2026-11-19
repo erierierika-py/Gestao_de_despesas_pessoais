@@ -30,6 +30,11 @@ class TestSaldo(unittest.TestCase):
         linha = resumo_de_um_mes(RENDIMENTOS, DESPESAS, "2025-01")
         self.assertEqual(linha["saldo"], 0.0)
 
+    def test_formato_dd_mm_aaaa(self):
+        despesas = [{"valor": 10, "data": "05-11-2026"}]
+        resumo = resumo_mensal([], despesas)
+        self.assertEqual(resumo[0]["mes"], "2026-11")
+
 
 if __name__ == "__main__":
     unittest.main()
