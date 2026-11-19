@@ -36,3 +36,30 @@ def mostrar_despesas(lista):
             f"{x['categoria']:<15}{x['data']:<10}"
         )
     print("-" * 60)
+
+def menu_pesquisar():
+    """Pede um texto ao utilizador e mostra as despesas que o contêm na descrição.
+
+    Se o texto estiver vazio, a operação é cancelada. Se não houver
+    resultados, avisa o utilizador.
+    """
+    d = dados.carregar()
+
+    if not d["despesas"]:
+        print("Ainda não existem despesas registadas.")
+        return
+
+    texto = input("Pesquisar na descrição (Enter para cancelar): ").strip()
+    if not texto:
+        print("Pesquisa cancelada.")
+        return
+
+    resultados = pesquisar_por_descricao(d["despesas"], texto)
+
+    if not resultados:
+        print(f"Nenhuma despesa encontrada com '{texto}'.")
+        return
+
+    print(f"\n{len(resultados)} resultado(s) para '{texto}':")
+    
+    mostrar_despesas(resultados)
