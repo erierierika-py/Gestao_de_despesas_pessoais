@@ -138,3 +138,40 @@ def gasto_por_categoria(despesas):
 
     ordenado = sorted(totais.items(), key=total_do_par, reverse=True)
     return dict(ordenado)
+
+
+def menu_gasto_categoria():
+    """Mostra o gasto por categoria, com valor e percentagem do total.
+
+    Pergunta ao utilizador se quer ver um mês específico (AAAA-MM)
+    ou todos. Se não houver despesas, avisa.
+    """
+    d = dados.carregar()
+
+    if not d["despesas"]:
+        print("Ainda não existem despesas registadas.")
+        return
+
+    mes = input("Mês (AAAA-MM) ou Enter para ver todos: ").strip()
+
+    if mes:
+        despesas = [x for x in d["despesas"] if x["data"].startswith(mes)]
+        titulo = f"Gasto por categoria em {mes}"
+    else:
+        despesas = d["despesas"]
+        titulo = "Gasto por categoria (todos os meses)"
+
+    if not despesas:
+        print(f"Não há despesas para '{mes}'.")
+        return
+
+    totais = gasto_por_categoria(despesas)
+    total_geral = sum(totais.values())
+
+    print(f"\n{titulo}")
+    print("-" * 44)
+    for categoria, valor in totais.items():
+        percentagem = valor / total_geral * 100
+        print(f"{categoria:<18}{valor:>9.2f}€  {percentagem:>6.1f}%")
+    print("-" * 44)
+    print(f"{'Total':<18}{total_geral:>9.2f}€")
