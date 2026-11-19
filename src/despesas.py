@@ -145,3 +145,38 @@ def editar_despesa():
 
     print("Não existe nenhuma despesa com esse ID")
 
+
+# Issue 4
+
+def eliminar_despesa():
+    dados = carregar()
+    despesas = dados["despesas"]
+
+    print("\nEliminar Despesa")
+
+    if len(despesas) == 0:
+        print("Ainda não existem despesas")
+        return
+
+    for despesa in despesas:
+        print("ID:", despesa["id"], "-", despesa["descricao"])
+
+    try:
+        id_despesa = int(input("\nID da despesa que queres eliminar: "))
+    except ValueError:
+        print("ID invalido")
+        return
+
+    for despesa in despesas:
+        if despesa["id"] == id_despesa:
+
+            print("\nDescrição:", despesa["descricao"])
+            print("Valor:", despesa["valor"], "€")
+
+            despesas.remove(despesa)
+            guardar(dados)
+
+            print("\nDespesa eliminada")
+            return
+
+    print("Essa despesa nao e real")
