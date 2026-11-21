@@ -1,7 +1,8 @@
 
 from src import dados, rendimentos
 from src.despesas import adicionar_despesa, consultar_despesas, editar_despesa, eliminar_despesa
-
+from src.saldo import menu_saldo
+from src.poupanca import menu_poupanca
 
 def main():
     while True:
@@ -15,6 +16,8 @@ def main():
         print("3 - Editar despesa")
         print("4 - Remover despesa")
         print("5 - Rendimentos")
+        print("6 - ")
+        print("7 - ")
         print("0 - Sair")
 
         opcao = input("Escolhe uma opção: ")
@@ -35,10 +38,10 @@ def main():
             rendimentos.menu_rendimentos()
 
         elif opcao == "6":
-            saldo.menu_saldo()
+            menu_saldo()
 
         elif opcao == "7":
-            poupanca.menu_poupanca()
+            menu_poupanca()
 
         elif opcao == "0":
             print("Até à próxima")

@@ -1,6 +1,6 @@
 
-from datetime import datetime
 from .dados import carregar, guardar, proximo_id
+from .saldo import mostrar_limite_restante
 
 
 # Issue 1
@@ -8,34 +8,35 @@ from .dados import carregar, guardar, proximo_id
 def adicionar_despesa():
     print("\nAdicionar Despesa")
 
-    descricao = input("Descrição da despesa: ").strip()
-    if descricao == "":
-        print("Falta uma descrição")
-        return
+    while True:
+        descricao = input("Descrição da despesa: ").strip()
 
-    try:
-        valor = float(input("Valor da despesa (€): ").replace(",", "."))
+        if descricao == "":
+            print("Erro: Falta uma descrição")
+        else:
+            break
 
-        if valor <= 0:
-            print("O numero tem de ser maior que zero")
-            return
+    while True:
+        try:
+            valor = float(input("Valor da despesa (€): ").replace(",", "."))
 
-    except ValueError:
-        print("Valor invalido")
-        return
+            if valor <= 0:
+                print("Erro: O numero tem de ser maior que zero")
+            else:
+                break
 
-    categoria = input("Categoria: ").strip()
-    if categoria == "":
-        print("Indica uma categoria")
-        return
+        except ValueError:
+            print("Erro: Valor invalido, tenta novamente")
+
+    while True:
+        categoria = input("Categoria: ").strip()
+
+        if categoria == "":
+            print("Erro: Indica uma categoria")
+        else:
+            break
 
     data = input("Data (DD-MM-AAAA): ").strip()
-
-    try:
-        datetime.strptime(data, "%d-%m-%Y")
-    except ValueError:
-        print("A data não é válida")
-        return
 
     dados = carregar()
 
@@ -51,6 +52,8 @@ def adicionar_despesa():
     guardar(dados)
 
     print("\nRegisto adicionado!")
+
+    mostrar_limite_restante()
 
 
 # Issue 2
@@ -88,62 +91,66 @@ def editar_despesa():
     for despesa in despesas:
         print("ID:", despesa["id"], "-", despesa["descricao"])
 
-    try:
-        id_despesa = int(input("\nID da despesa que queres editar: "))
-    except ValueError:
-        print("ID inválido")
-        return
+    while True:
+        try:
+            id_despesa = int(input("\nID da despesa que queres editar: "))
 
-    for despesa in despesas:
-        if despesa["id"] == id_despesa:
+        except ValueError:
+            print("Erro: ID invalido, tenta novamente")
+            continue
 
-            print("\nDeixa vazio para manter o valor atual")
+        encontrada = None
 
-            descricao = input("Nova descrição: ").strip()
+        for despesa in despesas:
+            if despesa["id"] == id_despesa:
+                encontrada = despesa
+                break
 
-            valor_texto = input("Novo valor (€): ").replace(",", ".")
+        if encontrada is not None:
+            break
+        else:
+            print("Erro: Não existe nenhuma despesa com esse ID")
 
-            if valor_texto != "":
-                try:
-                    valor = float(valor_texto)
+    print("\nDeixa vazio para manter o valor atual")
 
-                    if valor <= 0:
-                        print("O numero tem de ser maior que zero")
-                        return
+    descricao = input("Nova descrição: ").strip()
 
-                except ValueError:
-                    print("Valor invalido")
-                    return
+    while True:
+        valor_texto = input("Novo valor (€): ").replace(",", ".")
 
-            categoria = input("Nova categoria: ").strip()
+        if valor_texto == "":
+            break
 
-            data = input("Nova data (DD-MM-AAAA): ").strip()
+        try:
+            valor = float(valor_texto)
 
-            if data != "":
-                try:
-                    datetime.strptime(data, "%d-%m-%Y")
-                except ValueError:
-                    print("A data é inválida")
-                    return
+            if valor <= 0:
+                print("Erro: O numero tem de ser maior que zero")
+            else:
+                break
 
-            if descricao != "":
-                despesa["descricao"] = descricao
+        except ValueError:
+            print("Erro: Valor invalido, tenta novamente")
 
-            if valor_texto != "":
-                despesa["valor"] = round(valor, 2)
+    categoria = input("Nova categoria: ").strip()
 
-            if categoria != "":
-                despesa["categoria"] = categoria
+    data = input("Nova data (DD-MM-AAAA): ").strip()
 
-            if data != "":
-                despesa["data"] = data
+    if descricao != "":
+        encontrada["descricao"] = descricao
 
-            guardar(dados)
+    if valor_texto != "":
+        encontrada["valor"] = round(valor, 2)
 
-            print("\nDespesa editada com sucesso!")
-            return
+    if categoria != "":
+        encontrada["categoria"] = categoria
 
-    print("Não existe nenhuma despesa com esse ID")
+    if data != "":
+        encontrada["data"] = data
+
+    guardar(dados)
+
+    print("\nDespesa editada com sucesso!")
 
 
 # Issue 4
@@ -161,22 +168,24 @@ def eliminar_despesa():
     for despesa in despesas:
         print("ID:", despesa["id"], "-", despesa["descricao"])
 
-    try:
-        id_despesa = int(input("\nID da despesa que queres eliminar: "))
-    except ValueError:
-        print("ID invalido")
-        return
+    while True:
+        try:
+            id_despesa = int(input("\nID da despesa que queres eliminar: "))
 
-    for despesa in despesas:
-        if despesa["id"] == id_despesa:
+        except ValueError:
+            print("Erro: ID invalido, tenta novamente")
+            continue
 
-            print("\nDescrição:", despesa["descricao"])
-            print("Valor:", despesa["valor"], "€")
+        for despesa in despesas:
+            if despesa["id"] == id_despesa:
 
-            despesas.remove(despesa)
-            guardar(dados)
+                print("\nDescrição:", despesa["descricao"])
+                print("Valor:", despesa["valor"], "€")
 
-            print("\nDespesa eliminada")
-            return
+                despesas.remove(despesa)
+                guardar(dados)
 
-    print("Essa despesa nao e real")
+                print("\nDespesa eliminada")
+                return
+
+        print("Erro: Essa despesa não existe, tenta novamente")
