@@ -1,3 +1,4 @@
+"""Menu principal do Gestor de Despesas Pessoais."""
 
 from src import dados, poupanca, rendimentos, saldo
 from src.despesas import adicionar_despesa, consultar_despesas, editar_despesa, eliminar_despesa
