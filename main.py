@@ -1,6 +1,6 @@
 """Menu principal do Gestor de Despesas Pessoais."""
 
-from src import dados, poupanca, rendimentos, saldo
+from src import dados, login, poupanca, rendimentos, saldo
 from src.despesas import adicionar_despesa, consultar_despesas, editar_despesa, eliminar_despesa
 from src.utilitarios import confirmar
 
@@ -13,7 +13,10 @@ def confirmar_saida():
     return confirmar("Queres mesmo sair?")
 
 def main():
-    """Mostra o menu principal em ciclo e executa a opção escolhida."""
+    """Pede o login e, se for válido, mostra o menu principal em ciclo."""
+    if not login.fazer_login():
+        return
+
     while True:
         print("\nGESTÃO DE DESPESAS PESSOAIS")
 
