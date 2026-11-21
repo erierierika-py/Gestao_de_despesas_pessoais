@@ -1,7 +1,16 @@
+"""Menu principal do Gestor de Despesas Pessoais."""
 
 from src import dados, poupanca, rendimentos, saldo
 from src.despesas import adicionar_despesa, consultar_despesas, editar_despesa, eliminar_despesa
+from src.utilitarios import confirmar
 
+def confirmar_saida():
+    """Pergunta ao utilizador se quer mesmo sair da aplicação.
+
+    Returns:
+        bool: True se o utilizador confirmar a saída, False caso contrário.
+    """
+    return confirmar("Queres mesmo sair?")
 
 def main():
     """Mostra o menu principal em ciclo e executa a opção escolhida."""
@@ -21,7 +30,7 @@ def main():
         print("7 - Poupança")
         print("0 - Sair")
 
-        opcao = input("Escolhe uma opção: ")
+        opcao = input("Escolhe uma opção: ").strip()
 
         if opcao == "1":
             adicionar_despesa()
@@ -45,12 +54,16 @@ def main():
             poupanca.menu_poupanca()
 
         elif opcao == "0":
-            print("Até à próxima")
-            break
+            if confirmar_saida():
+                print("Os teus dados estão guardados. Até à próxima!")
+                break
 
         else:
             print("Opção inválida")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (KeyboardInterrupt, EOFError):
+        print("\nAplicação terminada. Os teus dados estão guardados.")
