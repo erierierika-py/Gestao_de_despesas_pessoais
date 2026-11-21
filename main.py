@@ -4,6 +4,7 @@ from src.despesas import adicionar_despesa, consultar_despesas, editar_despesa, 
 
 
 def main():
+    """Mostra o menu principal em ciclo e executa a opção escolhida."""
     while True:
         print("\nGESTÃO DE DESPESAS PESSOAIS")
 
