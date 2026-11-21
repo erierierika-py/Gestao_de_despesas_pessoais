@@ -1,20 +1,24 @@
 
-from src import dados, rendimentos
+from src import dados, poupanca, rendimentos, saldo
 from src.despesas import adicionar_despesa, consultar_despesas, editar_despesa, eliminar_despesa
 
 
 def main():
+    """Mostra o menu principal em ciclo e executa a opção escolhida."""
     while True:
         print("\nGESTÃO DE DESPESAS PESSOAIS")
 
         d = dados.carregar()
         print(f"{len(d['despesas'])} despesas registadas.")
+        saldo.aviso_saldo_baixo(d)
 
         print("1 - Adicionar despesa")
         print("2 - Consultar despesas")
         print("3 - Editar despesa")
         print("4 - Remover despesa")
         print("5 - Rendimentos")
+        print("6 - Saldo e histórico")
+        print("7 - Poupança")
         print("0 - Sair")
 
         opcao = input("Escolhe uma opção: ")
