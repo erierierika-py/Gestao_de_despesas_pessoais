@@ -9,6 +9,7 @@ def main():
 
         d = dados.carregar()
         print(f"{len(d['despesas'])} despesas registadas.")
+        saldo.aviso_saldo_baixo(d)
 
         print("1 - Adicionar despesa")
         print("2 - Consultar despesas")
