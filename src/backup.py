@@ -27,7 +27,7 @@ def criar_backup():
 
 def listar_backups():
     """Devolve a lista de backups existentes, do mais recente para o mais antigo.
-    Devolve:
+    Returns:
         list[str]: Nomes dos ficheiros de backup.
     """
     if not os.path.isdir(pasta_backups):

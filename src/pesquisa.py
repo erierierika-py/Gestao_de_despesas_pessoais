@@ -10,7 +10,7 @@ def pesquisar_por_descricao(despesas, texto):
         despesas: Lista de despesas.
         texto: Texto a procurar na descrição.
 
-    Devolve:
+    Returns:
         list: Despesas que contêm o texto (pode ser uma lista vazia).
     """
     texto = texto.strip().lower()
@@ -74,7 +74,7 @@ def filtrar_por_categoria(despesas, categoria):
         despesas (list[dict]): Lista de despesas.
         categoria (str): Nome da categoria a filtrar.
 
-    Devolve:
+    Returns:
         list[dict]: Despesas dessa categoria (pode ser uma lista vazia).
     """
     categoria = categoria.strip().lower()
@@ -124,7 +124,7 @@ def gasto_por_categoria(despesas):
     Args:
         despesas (list[dict]): Lista de despesas.
 
-    Devolve:
+    Returns:
         dict: Categoria -> total gasto, ordenado da categoria com mais
             gastos para a com menos.
     """

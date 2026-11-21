@@ -73,7 +73,7 @@ def total_mensal(subscricoes):
     Args:
         subscricoes (list[dict]): Lista de subscrições.
 
-    Devolve:
+    Returns:
         float: Soma dos valores.
     """
     return sum(s["valor"] for s in subscricoes)
