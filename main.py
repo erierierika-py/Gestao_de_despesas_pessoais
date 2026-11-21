@@ -29,7 +29,7 @@ def main():
         print("7 - Poupança")
         print("0 - Sair")
 
-        opcao = input("Escolhe uma opção: ")
+        opcao = input("Escolhe uma opção: ").strip()
 
         if opcao == "1":
             adicionar_despesa()
@@ -53,8 +53,9 @@ def main():
             poupanca.menu_poupanca()
 
         elif opcao == "0":
-            print("Até à próxima")
-            break
+            if confirmar_saida():
+                print("Os teus dados estão guardados. Até à próxima!")
+                break
 
         else:
             print("Opção inválida")
