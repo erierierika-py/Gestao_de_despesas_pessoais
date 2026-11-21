@@ -84,3 +84,33 @@ def criar_palavra_passe():
     dados.guardar(d)
     print("Palavra-passe criada com sucesso.")
     return True
+
+
+max_tentativas = 3
+
+def fazer_login():
+    """Faz o login do utilizador no arranque da aplicação.
+
+    Na primeira execução (sem palavra-passe guardada), pede para criar uma.
+    Nas seguintes, pede a palavra-passe com um máximo de 3 tentativas.
+
+    Returns:
+        bool: True se o utilizador pode entrar, False caso contrário.
+    """
+    d = dados.carregar()
+    guardado = d.get("login")
+
+    if not guardado or "hash" not in guardado:
+        return criar_palavra_passe()
+
+    for tentativa in range(1, max_tentativas + 1):
+        escrita = getpass.getpass("Palavra-passe: ")
+        if verificar_palavra_passe(escrita, d):
+            print("Login efetuado com sucesso.")
+            return True
+        restantes = max_tentativas - tentativa
+        if restantes > 0:
+            print(f"Palavra-passe incorreta. Restam {restantes} tentativa(s).")
+
+    print("Demasiadas tentativas falhadas. A aplicação vai fechar.")
+    return False
