@@ -6,7 +6,7 @@ from src.poupanca import calcular_poupado
 
 # Aceita os dois formatos usados no grupo, até se decidir um só.
 FORMATOS_DATA = ("%Y-%m-%d", "%d-%m-%Y")
-
+LIMITE_AVISO = 0.20  # avisa quando resta menos de 20% do que se recebeu
 
 def mes_da_data(texto):
     """Extrai o mês (AAAA-MM) de uma data escrita num dos formatos aceites.
@@ -158,3 +158,35 @@ def menu_saldo():
             break
         else:
             print("Opção inválida. Escolhe 1, 2, 3 ou 0.")
+
+def estado_saldo(total_rendimentos, saldo):
+    """Classifica o estado do saldo.
+
+    Args:
+        total_rendimentos (float): Soma de todos os rendimentos.
+        saldo (float): Saldo atual (rendimentos menos despesas).
+
+    Returns:
+        str: 'negativo', 'baixo' (resta menos de LIMITE_AVISO do que se
+        recebeu) ou 'ok'.
+    """
+    if saldo < 0:
+        return "negativo"
+    if total_rendimentos > 0 and saldo < total_rendimentos * LIMITE_AVISO:
+        return "baixo"
+    return "ok"
+
+
+def aviso_saldo_baixo(d):
+    """Mostra um aviso se o dinheiro estiver a acabar.
+
+    Args:
+        d (dict): Dicionário completo de dados (resultado de dados.carregar()).
+    """
+    saldo = calcular_poupado(d)
+    total = sum(r["valor"] for r in d["rendimentos"])
+    estado = estado_saldo(total, saldo)
+    if estado == "negativo":
+        print(f"AVISO: o saldo está negativo ({saldo:.2f}€)!")
+    elif estado == "baixo":
+        print(f"AVISO: o dinheiro está a acabar! Restam {saldo:.2f}€.")
