@@ -1,5 +1,6 @@
 """Módulo de login: criar e verificar a palavra-passe da aplicação."""
 
+import getpass
 import hashlib
 import secrets #secrets e n random por segurança
 
@@ -47,3 +48,39 @@ def verificar_palavra_passe(palavra_passe, d):
 
     hash_escrito = gerar_hash(palavra_passe, guardado["salt"])
     return secrets.compare_digest(hash_escrito, guardado["hash"])
+
+
+def criar_palavra_passe():
+    """Pede ao utilizador para criar uma palavra-passe e guarda-a (só o hash).
+
+    A palavra-passe tem de ter pelo menos 4 caracteres e tem de ser
+    confirmada. Se o utilizador carregar em Enter sem escrever nada,
+    a operação é cancelada.
+
+    Returns:
+        bool: True se a palavra-passe foi criada, False se foi cancelada.
+    """
+    print("Ainda não existe palavra-passe. Vamos criar uma.")
+
+    while True:
+        nova_pw = getpass.getpass("Nova palavra-passe (Enter para cancelar): ")
+        if not nova_pw:
+            print("Operação cancelada.")
+            return False
+        if len(nova_pw) < 4:
+            print("A palavra-passe tem de ter pelo menos 4 caracteres.")
+            continue
+
+# getpass funciona como o input, mas não mostra o que é escrito no ecrã
+        confirmacao = getpass.getpass("Confirma a palavra-passe: ")
+        if confirmacao != nova_pw:
+            print("As palavras-passe não coincidem. Tenta outra vez.")
+            continue
+        break
+
+    d = dados.carregar()
+    salt = gerar_salt()
+    d["login"] = {"salt": salt, "hash": gerar_hash(nova_pw, salt)}
+    dados.guardar(d)
+    print("Palavra-passe criada com sucesso.")
+    return True
