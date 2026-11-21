@@ -1,5 +1,5 @@
 
-from src import dados, rendimentos
+from src import dados, poupanca, rendimentos, saldo
 from src.despesas import adicionar_despesa, consultar_despesas, editar_despesa, eliminar_despesa
 
 
@@ -15,6 +15,8 @@ def main():
         print("3 - Editar despesa")
         print("4 - Remover despesa")
         print("5 - Rendimentos")
+        print("6 - Saldo e histórico")
+        print("7 - Poupança")
         print("0 - Sair")
 
         opcao = input("Escolhe uma opção: ")
