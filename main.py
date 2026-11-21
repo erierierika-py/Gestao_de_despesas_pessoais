@@ -1,7 +1,15 @@
 
 from src import dados, poupanca, rendimentos, saldo
 from src.despesas import adicionar_despesa, consultar_despesas, editar_despesa, eliminar_despesa
+from src.utilitarios import confirmar
 
+def confirmar_saida():
+    """Pergunta ao utilizador se quer mesmo sair da aplicação.
+
+    Returns:
+        bool: True se o utilizador confirmar a saída, False caso contrário.
+    """
+    return confirmar("Queres mesmo sair?")
 
 def main():
     """Mostra o menu principal em ciclo e executa a opção escolhida."""
