@@ -19,7 +19,7 @@ class TestSair(unittest.TestCase):
                 redirect_stdout(io.StringIO()) as saida:
             main.main()
         return saida.getvalue()
-        
+
     def test_sair_confirmado(self):
         texto = self.executar(["0", "s"])
         self.assertIn("Até à próxima", texto)
@@ -37,6 +37,16 @@ class TestSair(unittest.TestCase):
             self.assertTrue(main.confirmar_saida())
         with patch("builtins.input", return_value="n"):
             self.assertFalse(main.confirmar_saida())
+
+    def test_login_recusado_nao_mostra_menu(self):
+        with patch("main.login.fazer_login", return_value=False), \
+                redirect_stdout(io.StringIO()) as saida:
+            main.main()
+        self.assertNotIn("GESTÃO DE DESPESAS PESSOAIS", saida.getvalue())
+
+    def test_login_aceite_mostra_menu(self):
+        texto = self.executar(["0", "s"])
+        self.assertIn("GESTÃO DE DESPESAS PESSOAIS", texto)
 
 
 if __name__ == "__main__":
