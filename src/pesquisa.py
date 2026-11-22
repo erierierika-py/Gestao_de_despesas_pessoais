@@ -1,6 +1,9 @@
 """Módulo de pesquisa: procurar, filtrar e resumir despesas."""
 
+from datetime import datetime
+
 from src import dados
+from src.saldo import mes_da_data
 
 def pesquisar_por_descricao(despesas, texto):
     """Devolve as despesas cuja descrição contém o texto indicado.
@@ -134,11 +137,41 @@ def gasto_por_categoria(despesas):
         totais[categoria] = totais.get(categoria, 0) + x["valor"]
 
     def total_do_par(par):
+        """Devolve o total de um par (categoria, total), para ordenar."""
         return par[1]
 
     ordenado = sorted(totais.items(), key=total_do_par, reverse=True)
     return dict(ordenado)
 
+def filtrar_por_mes(despesas, mes):
+    """Devolve as despesas de um mês, aceitando os dois formatos de data.
+
+    Args:
+        despesas (list[dict]): Lista de despesas.
+        mes (str): Mês no formato AAAA-MM.
+
+    Returns:
+        list[dict]: Despesas desse mês (pode ser uma lista vazia).
+    """
+    return [x for x in despesas if mes_da_data(x["data"]) == mes]
+
+
+def categorias_disponiveis(d):
+    """Junta as categorias registadas com as usadas nas despesas.
+
+    Não repete categorias que só diferem nas maiúsculas.
+
+    Args:
+        d (dict): Dicionário completo de dados.
+
+    Returns:
+        list[str]: Categorias por ordem alfabética.
+    """
+    vistas = {}
+    nomes = list(d["categorias"]) + [x["categoria"] for x in d["despesas"]]
+    for nome in nomes:
+        vistas.setdefault(nome.strip().lower(), nome.strip())
+    return sorted(vistas.values(), key=str.lower)
 
 def menu_gasto_categoria():
     """Mostra o gasto por categoria, com valor e percentagem do total.
