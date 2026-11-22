@@ -10,6 +10,8 @@ from .utilitarios import confirmar
 FORMATO_DATA = "%Y-%m-%d"
 
 def adicionar_despesa():
+    """Pede os dados de uma despesa, valida-os e guarda-a."""
+
     print("\nAdicionar Despesa")
 
     while True:
@@ -69,6 +71,8 @@ def adicionar_despesa():
 
 
 def consultar_despesas():
+    """Mostra na consola todas as despesas registadas."""
+
     dados = carregar()
     despesas = dados["despesas"]
 
@@ -87,6 +91,9 @@ def consultar_despesas():
 
 
 def editar_despesa():
+    """Altera uma despesa escolhida pelo id.
+    Os campos deixados em branco mantêm o valor atual.
+    """
     dados = carregar()
     despesas = dados["despesas"]
 
@@ -162,6 +169,7 @@ def editar_despesa():
 
 
 def eliminar_despesa():
+    """Elimina uma despesa escolhida pelo id, depois de pedir confirmação."""
     dados = carregar()
     despesas = dados["despesas"]
 
