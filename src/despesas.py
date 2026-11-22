@@ -188,6 +188,10 @@ def eliminar_despesa():
                 print("\nDescrição:", despesa["descricao"])
                 print("Valor:", despesa["valor"], "€")
 
+                if not confirmar("Eliminar esta despesa?"):
+                    print("Operação cancelada.")
+                    return
+
                 despesas.remove(despesa)
                 guardar(dados)
 
