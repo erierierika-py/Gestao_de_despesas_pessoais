@@ -12,8 +12,14 @@ LIMITE_AVISO = 0.20  # avisa quando resta menos de 20% do que se recebeu
 PERTO_DO_LIMITE = 0.8  # avisa quando já se gastou 80% do limite mensal
 
 def mes_da_data(texto):
-    """Extrai o mês de uma data válida."""
+    """Extrai o mês (AAAA-MM) de uma data escrita num dos formatos aceites.
 
+    Args:
+        texto (str): Data, por exemplo '2026-11-05' ou '05-11-2026'.
+
+    Returns:
+        str | None: O mês no formato AAAA-MM, ou None se a data for inválida.
+    """
     for formato in FORMATOS_DATA:
         try:
             return datetime.strptime(texto, formato).strftime("%Y-%m")
@@ -23,7 +29,16 @@ def mes_da_data(texto):
 
 
 def total_por_mes(registos):
-    """Calcula o total de registos por mês."""
+    """Soma os valores dos registos agrupados por mês.
+
+    Registos com data inválida são ignorados.
+
+    Args:
+        registos (list[dict]): Registos com as chaves 'valor' e 'data'.
+
+    Returns:
+        dict[str, float]: Total por mês, por exemplo {'2026-11': 850.5}.
+    """
     totais = {}
 
     for registo in registos:
@@ -38,7 +53,16 @@ def total_por_mes(registos):
 
 
 def resumo_mensal(rendimentos, despesas):
-    """Calcula rendimentos, despesas e saldo de cada mês."""
+    """Calcula rendimentos, despesas e saldo de cada mês.
+
+    Args:
+        rendimentos (list[dict]): Lista de rendimentos.
+        despesas (list[dict]): Lista de despesas.
+
+    Returns:
+        list[dict]: Um dicionário por mês, por ordem cronológica, com as
+        chaves 'mes', 'rendimentos', 'despesas' e 'saldo'.
+    """
     rend = total_por_mes(rendimentos)
     desp = total_por_mes(despesas)
     resumo = []
@@ -58,7 +82,16 @@ def resumo_mensal(rendimentos, despesas):
 
 
 def resumo_de_um_mes(rendimentos, despesas, mes):
-    """Devolve o resumo de um mês específico."""
+    """Devolve o resumo de um mês específico.
+
+    Args:
+        rendimentos (list[dict]): Lista de rendimentos.
+        despesas (list[dict]): Lista de despesas.
+        mes (str): Mês no formato AAAA-MM.
+
+    Returns:
+        dict: Resumo do mês; com zeros se não houver registos.
+    """
     for linha in resumo_mensal(rendimentos, despesas):
         if linha["mes"] == mes:
             return linha
@@ -224,8 +257,16 @@ def menu_saldo():
 
 
 def estado_saldo(total_rendimentos, saldo):
-    """Classifica o estado do saldo."""
+    """Classifica o estado do saldo.
 
+    Args:
+        total_rendimentos (float): Soma de todos os rendimentos.
+        saldo (float): Saldo atual (rendimentos menos despesas).
+
+    Returns:
+        str: 'negativo', 'baixo' (resta menos de LIMITE_AVISO do que se
+        recebeu) ou 'ok'.
+    """
     if saldo < 0:
         return "negativo"
 
@@ -236,7 +277,11 @@ def estado_saldo(total_rendimentos, saldo):
 
 
 def aviso_saldo_baixo(d):
-    """Mostra um aviso se o dinheiro estiver a acabar."""
+    """Mostra um aviso se o dinheiro estiver a acabar.
+
+    Args:
+        d (dict): Dicionário completo de dados (resultado de dados.carregar()).
+    """
 
     saldo = calcular_poupado(d)
     total = sum(r["valor"] for r in d["rendimentos"])

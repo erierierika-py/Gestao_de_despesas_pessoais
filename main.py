@@ -1,15 +1,19 @@
 
 """Menu principal do Gestor de Despesas Pessoais."""
 
-from src import ajuda, backup, dados, login, pesquisa, poupanca, rendimentos, saldo, subscricoes
-from src.despesas import adicionar_despesa, consultar_despesas, editar_despesa, eliminar_despesa
-from src.saldo import menu_saldo
-from src.poupanca import menu_poupanca
+from src import (ajuda, backup, dados, login, pesquisa, poupanca,
+                 rendimentos, saldo, subscricoes)
+from src.despesas import (adicionar_despesa, consultar_despesas,
+                          editar_despesa, eliminar_despesa)
 from src.utilitarios import confirmar
 
 
 def confirmar_saida():
-    """Pergunta ao utilizador se quer mesmo sair da aplicação."""
+    """Pergunta ao utilizador se quer mesmo sair da aplicação.
+
+    Returns:
+        bool: True se o utilizador confirmar a saída, False caso contrário.
+    """
     return confirmar("Queres mesmo sair?")
 
 
@@ -99,10 +103,10 @@ def main():
             rendimentos.menu_rendimentos()
 
         elif opcao == "6":
-            menu_saldo()
+            saldo.menu_saldo()
 
         elif opcao == "7":
-            menu_poupanca()
+            poupanca.menu_poupanca()
 
         elif opcao == "8":
             pesquisa.menu_pesquisar()
