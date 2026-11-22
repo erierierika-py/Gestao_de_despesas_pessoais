@@ -1,15 +1,19 @@
 
 """Cálculos de saldo, totais mensais e histórico financeiro."""
 
+import math
 from datetime import datetime
 from src import dados
 from src.poupanca import calcular_poupado
 
-
+# Aceita os dois formatos usados no grupo
 FORMATOS_DATA = ("%Y-%m-%d", "%d-%m-%Y")
 LIMITE_AVISO = 0.20  # avisa quando resta menos de 20% do que se recebeu
+PERTO_DO_LIMITE = 0.8  # avisa quando já se gastou 80% do limite mensal
 
 def mes_da_data(texto):
+    """Extrai o mês de uma data válida."""
+
     for formato in FORMATOS_DATA:
         try:
             return datetime.strptime(texto, formato).strftime("%Y-%m")
@@ -19,6 +23,7 @@ def mes_da_data(texto):
 
 
 def total_por_mes(registos):
+    """Calcula o total de registos por mês."""
     totais = {}
 
     for registo in registos:
@@ -33,6 +38,7 @@ def total_por_mes(registos):
 
 
 def resumo_mensal(rendimentos, despesas):
+    """Calcula rendimentos, despesas e saldo de cada mês."""
     rend = total_por_mes(rendimentos)
     desp = total_por_mes(despesas)
     resumo = []
@@ -52,6 +58,7 @@ def resumo_mensal(rendimentos, despesas):
 
 
 def resumo_de_um_mes(rendimentos, despesas, mes):
+    """Devolve o resumo de um mês específico."""
     for linha in resumo_mensal(rendimentos, despesas):
         if linha["mes"] == mes:
             return linha
@@ -65,6 +72,7 @@ def resumo_de_um_mes(rendimentos, despesas, mes):
 
 
 def consultar_resumo_mensal():
+    """Pede um mês e mostra o respetivo resumo."""
     while True:
         mes = input("Mês (AAAA-MM, Enter para cancelar): ").strip()
 
@@ -91,6 +99,7 @@ def consultar_resumo_mensal():
 
 
 def mostrar_saldo_total():
+    """Mostra o saldo total de todos os registos."""
     base = dados.carregar()
     saldo = calcular_poupado(base)
 
@@ -101,6 +110,7 @@ def mostrar_saldo_total():
 
 
 def mostrar_historico():
+    """Mostra o histórico mensal de rendimentos, despesas e saldo."""
     base = dados.carregar()
     resumo = resumo_mensal(base["rendimentos"], base["despesas"])
 
@@ -119,32 +129,37 @@ def mostrar_historico():
 # Limite de gastos mensal
 
 def definir_limite_mensal():
+    """Define o limite mensal de gastos."""
     base = dados.carregar()
 
     print("\nDefinir Limite Mensal")
-    print("Limite atual:", base["orcamento"]["limite_mensal"], "€")
+    print(f"Limite atual: {base['orcamento']['limite_mensal']:.2f}€")
 
     while True:
+        texto = input("Novo limite mensal em € (Enter para cancelar): ")
+        texto = texto.strip().replace(",", ".")
+        if not texto:
+            print("Operação cancelada.")
+            return
         try:
-            limite = float(input("Novo limite mensal (€): ").replace(",", "."))
-
-            if limite <= 0:
-                print("Erro: O limite tem de ser maior que zero")
-            else:
-                break
-
+            limite = float(texto)
         except ValueError:
-            print("Erro: Valor invalido, tenta novamente")
+            print("Erro: Valor inválido, tenta novamente")
+            continue
+        if not math.isfinite(limite) or limite <= 0:
+            print("Erro: O limite tem de ser um número maior que zero")
+            continue
+        break
 
     base["orcamento"]["limite_mensal"] = round(limite, 2)
     dados.guardar(base)
 
     print("\nLimite mensal guardado com sucesso!")
 
-
 # Verificar dinheiro restante
 
 def mostrar_limite_restante():
+    """Mostra o limite de gastos restante do mês atual."""
     base = dados.carregar()
 
     limite = base["orcamento"]["limite_mensal"]
@@ -173,6 +188,7 @@ def mostrar_limite_restante():
 
 
 def menu_saldo():
+    """Mostra o menu de saldo, histórico e limite mensal."""
     while True:
         print("\n*** SALDO E HISTÓRICO ***")
         print("1. Saldo total")
