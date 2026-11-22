@@ -1,6 +1,6 @@
 """Menu principal do Gestor de Despesas Pessoais."""
 
-from src import backup, dados, login, pesquisa, poupanca, rendimentos, saldo, subscricoes
+from src import ajuda, backup, dados, login, pesquisa, poupanca, rendimentos, saldo, subscricoes
 from src.despesas import adicionar_despesa, consultar_despesas, editar_despesa, eliminar_despesa
 from src.utilitarios import confirmar
 
@@ -78,6 +78,7 @@ def main():
         print("10 - Gasto por categoria")
         print("11 - Subscrições")
         print("12 - Backup")
+        print("13 - Ajuda")
         print("0 - Sair")
 
         opcao = input("Escolhe uma opção: ").strip()
@@ -117,6 +118,9 @@ def main():
 
         elif opcao == "12":
             menu_backup()
+
+        elif opcao == "13":
+            ajuda.mostrar_ajuda()
 
         elif opcao == "0":
             if confirmar_saida():
