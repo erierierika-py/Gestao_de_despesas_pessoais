@@ -1,3 +1,4 @@
+"""Funções para adicionar, consultar, editar e eliminar despesas."""
 
 from .dados import carregar, guardar, proximo_id
 from .saldo import mostrar_limite_restante
@@ -6,6 +7,7 @@ from .saldo import mostrar_limite_restante
 # Issue 1
 
 def adicionar_despesa():
+    """Pede os dados de uma despesa, guarda-os e mostra o orçamento restante."""
     print("\nAdicionar Despesa")
 
     while True:
@@ -59,6 +61,7 @@ def adicionar_despesa():
 # Issue 2
 
 def consultar_despesas():
+    """Mostra as despesas registadas com o seu ID e outros dados."""
     dados = carregar()
     despesas = dados["despesas"]
 
@@ -79,6 +82,7 @@ def consultar_despesas():
 # Issue 3
 
 def editar_despesa():
+    """Edita uma despesa pelo ID e mantém os campos deixados vazios."""
     dados = carregar()
     despesas = dados["despesas"]
 
@@ -156,6 +160,7 @@ def editar_despesa():
 # Issue 4
 
 def eliminar_despesa():
+    """Elimina a despesa indicada pelo ID e guarda a alteração."""
     dados = carregar()
     despesas = dados["despesas"]
 
