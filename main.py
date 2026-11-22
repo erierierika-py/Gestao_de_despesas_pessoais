@@ -1,26 +1,40 @@
 
-from src import dados, rendimentos
+"""Menu principal do Gestor de Despesas Pessoais."""
+
+from src import dados, login, poupanca, rendimentos, saldo
 from src.despesas import adicionar_despesa, consultar_despesas, editar_despesa, eliminar_despesa
 from src.saldo import menu_saldo
 from src.poupanca import menu_poupanca
+from src.utilitarios import confirmar
+
+
+def confirmar_saida():
+    """Pergunta ao utilizador se quer mesmo sair da aplicação."""
+    return confirmar("Queres mesmo sair?")
+
 
 def main():
+    """Pede o login e, se for válido, mostra o menu principal em ciclo."""
+    if not login.fazer_login():
+        return
+
     while True:
         print("\nGESTÃO DE DESPESAS PESSOAIS")
 
         d = dados.carregar()
         print(f"{len(d['despesas'])} despesas registadas.")
+        saldo.aviso_saldo_baixo(d)
 
         print("1 - Adicionar despesa")
         print("2 - Consultar despesas")
         print("3 - Editar despesa")
         print("4 - Remover despesa")
         print("5 - Rendimentos")
-        print("6 - ")
-        print("7 - ")
+        print("6 - Saldo e histórico")
+        print("7 - Poupança")
         print("0 - Sair")
 
-        opcao = input("Escolhe uma opção: ")
+        opcao = input("Escolhe uma opção: ").strip()
 
         if opcao == "1":
             adicionar_despesa()
@@ -44,12 +58,16 @@ def main():
             menu_poupanca()
 
         elif opcao == "0":
-            print("Até à próxima")
-            break
+            if confirmar_saida():
+                print("Os teus dados estão guardados. Até à próxima!")
+                break
 
         else:
             print("Opção inválida")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (KeyboardInterrupt, EOFError):
+        print("\nAplicação terminada. Os teus dados estão guardados.")

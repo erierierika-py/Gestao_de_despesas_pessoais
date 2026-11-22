@@ -2,7 +2,7 @@
 
 import unittest
 
-from src.saldo import mes_da_data, resumo_mensal, resumo_de_um_mes
+from src.saldo import mes_da_data, resumo_mensal, resumo_de_um_mes, estado_saldo
 
 RENDIMENTOS = [{"valor": 1200, "data": "2026-10-05"},
                {"valor": 1200, "data": "2026-11-05"}]
@@ -34,6 +34,12 @@ class TestSaldo(unittest.TestCase):
         despesas = [{"valor": 10, "data": "05-11-2026"}]
         resumo = resumo_mensal([], despesas)
         self.assertEqual(resumo[0]["mes"], "2026-11")
+
+    def test_estado_saldo(self):
+        self.assertEqual(estado_saldo(1000, -5), "negativo")
+        self.assertEqual(estado_saldo(1000, 150), "baixo")
+        self.assertEqual(estado_saldo(1000, 500), "ok")
+        self.assertEqual(estado_saldo(0, 0), "ok")
 
 
 if __name__ == "__main__":

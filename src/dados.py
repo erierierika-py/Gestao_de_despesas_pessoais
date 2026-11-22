@@ -12,6 +12,7 @@ dados_iniciais = {
     "orcamento": {"limite_mensal": 0},
     "poupanca": {"objetivo": 0},
     "subscricoes": [],
+    "login": {},
 }
 
 
