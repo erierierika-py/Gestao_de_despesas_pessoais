@@ -24,7 +24,7 @@ def adicionar_despesa():
         try:
             valor = float(input("Valor da despesa (€): ").replace(",", "."))
 
-            if valor <= 0:
+            if not math.isfinite(valor) or valor <= 0:
                 print("Erro: O numero tem de ser maior que zero")
             else:
                 break
@@ -132,7 +132,7 @@ def editar_despesa():
         try:
             valor = float(valor_texto)
 
-            if valor <= 0:
+            if not math.isfinite(valor) or valor <= 0:
                 print("Erro: O numero tem de ser maior que zero")
             else:
                 break
