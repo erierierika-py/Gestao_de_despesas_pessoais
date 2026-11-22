@@ -14,14 +14,14 @@ def criar_backup():
     O nome do file inclui a data e a hora.
     Se ainda não existirem dados, mostra mensagem e não faz nada.
     """
-    if not os.path.exists(dados.FICHEIRO):
+    if not os.path.exists(dados.ficheiro):
         print("Ainda não existem dados para guardar. Registe algo primeiro.")
         return
 
     os.makedirs(pasta_backups, exist_ok=True)
     nome = datetime.now().strftime("backup_%Y-%m-%d_%H-%M-%S.json")
     destino = os.path.join(pasta_backups, nome)
-    shutil.copy(dados.FICHEIRO, destino)
+    shutil.copy(dados.ficheiro, destino)
     print(f"Backup criado em: {destino}")
 
 
@@ -74,6 +74,6 @@ def restaurar_backup():
         print("Operação cancelada.")
         return
 
-    os.makedirs(os.path.dirname(dados.FICHEIRO), exist_ok=True)
-    shutil.copy(os.path.join(pasta_backups, nome), dados.FICHEIRO)
+    os.makedirs(os.path.dirname(dados.ficheiro), exist_ok=True)
+    shutil.copy(os.path.join(pasta_backups, nome), dados.ficheiro)
     print("Backup restaurado com sucesso.")
