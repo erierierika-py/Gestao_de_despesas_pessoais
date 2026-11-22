@@ -152,15 +152,23 @@ Os testes usam dados criados dentro de cada teste, por isso não dependem do `da
 
 ## Documentação
 
-**Código:** todas as funções têm docstrings. A documentação em HTML é gerada com o [Sphinx](https://www.sphinx-doc.org):
+**Código:** todas as funções têm docstrings. A documentação em HTML é gerada com o [Sphinx](https://www.sphinx-doc.org) e já está incluída no repositório, em `docs/_build/html`.
+
+Para a ver, abre `docs/_build/html/index.html` no browser.
+
+
+Para voltar a gerar (por exemplo, depois de alterar o código):
 
 ```bash
 pip install sphinx
-cd docs
-make html
+python -m sphinx -b html docs docs/_build/html
 ```
 
-Abre depois `docs/_build/html/index.html` no browser.
+Se forem acrescentados módulos novos em `src/`, atualiza primeiro as páginas com:
+
+```bash
+python -m sphinx.ext.apidoc -o docs src
+```
 
 **Wiki:** o fluxo de trabalho com Git, a estrutura dos dados, as user stories e as decisões do projeto estão na [Wiki do repositório](https://github.com/erierierika-py/Gestao_de_despesas_pessoais/wiki).
 
