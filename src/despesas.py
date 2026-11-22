@@ -1,6 +1,6 @@
 
-from datetime import datetime
 from .dados import carregar, guardar, proximo_id
+from .saldo import mostrar_limite_restante
 
 
 # Issue 1
@@ -36,15 +36,7 @@ def adicionar_despesa():
         else:
             break
 
-    while True:
-        data = input("Data (DD-MM-AAAA): ").strip()
-
-        try:
-            datetime.strptime(data, "%d-%m-%Y")
-            break
-
-        except ValueError:
-            print("Erro: A data não é válida, tenta novamente")
+    data = input("Data (DD-MM-AAAA): ").strip()
 
     dados = carregar()
 
@@ -60,6 +52,8 @@ def adicionar_despesa():
     guardar(dados)
 
     print("\nRegisto adicionado!")
+
+    mostrar_limite_restante()
 
 
 # Issue 2
@@ -102,7 +96,7 @@ def editar_despesa():
             id_despesa = int(input("\nID da despesa que queres editar: "))
 
         except ValueError:
-            print("Erro: ID inválido, tenta novamente")
+            print("Erro: ID invalido, tenta novamente")
             continue
 
         encontrada = None
@@ -112,7 +106,7 @@ def editar_despesa():
                 encontrada = despesa
                 break
 
-        if encontrada != None:
+        if encontrada is not None:
             break
         else:
             print("Erro: Não existe nenhuma despesa com esse ID")
@@ -140,18 +134,7 @@ def editar_despesa():
 
     categoria = input("Nova categoria: ").strip()
 
-    while True:
-        data = input("Nova data (DD-MM-AAAA): ").strip()
-
-        if data == "":
-            break
-
-        try:
-            datetime.strptime(data, "%d-%m-%Y")
-            break
-
-        except ValueError:
-            print("Erro: A data é inválida, tenta novamente")
+    data = input("Nova data (DD-MM-AAAA): ").strip()
 
     if descricao != "":
         encontrada["descricao"] = descricao
