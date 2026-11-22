@@ -1,3 +1,4 @@
+
 """Módulo de despesas: adicionar, consultar, editar e eliminar despesas."""
 
 import math
@@ -9,9 +10,9 @@ from .utilitarios import confirmar
 
 FORMATO_DATA = "%Y-%m-%d"
 
-def adicionar_despesa():
-    """Pede os dados de uma despesa, valida-os e guarda-a."""
 
+def adicionar_despesa():
+    """Pede e valida os dados de uma despesa, guarda-os e mostra o orçamento restante."""
     print("\nAdicionar Despesa")
 
     while True:
@@ -71,8 +72,7 @@ def adicionar_despesa():
 
 
 def consultar_despesas():
-    """Mostra na consola todas as despesas registadas."""
-
+    """Mostra as despesas registadas com o seu ID e restantes dados."""
     dados = carregar()
     despesas = dados["despesas"]
 
@@ -91,9 +91,7 @@ def consultar_despesas():
 
 
 def editar_despesa():
-    """Altera uma despesa escolhida pelo id.
-    Os campos deixados em branco mantêm o valor atual.
-    """
+    """Edita uma despesa pelo ID, mantendo os valores dos campos deixados vazios."""
     dados = carregar()
     despesas = dados["despesas"]
 
@@ -149,7 +147,18 @@ def editar_despesa():
 
     categoria = input("Nova categoria: ").strip()
 
-    data = input("Nova data (DD-MM-AAAA): ").strip()
+    while True:
+        data = input("Nova data (AAAA-MM-DD): ").strip()
+
+        if data == "":
+            break
+
+        try:
+            datetime.strptime(data, FORMATO_DATA)
+            break
+
+        except ValueError:
+            print("Erro: A data não é válida, tenta novamente")
 
     if descricao != "":
         encontrada["descricao"] = descricao
@@ -169,7 +178,7 @@ def editar_despesa():
 
 
 def eliminar_despesa():
-    """Elimina uma despesa escolhida pelo id, depois de pedir confirmação."""
+    """Elimina uma despesa pelo ID, após confirmação, e guarda a alteração."""
     dados = carregar()
     despesas = dados["despesas"]
 
