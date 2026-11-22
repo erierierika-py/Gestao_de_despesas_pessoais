@@ -119,25 +119,30 @@ Se ainda não existirem dados, mostra mensagem e não faz nada.</p>
 </section>
 <section id="module-src.despesas">
 <span id="src-despesas-module"></span><h2>src.despesas module<a class="headerlink" href="#module-src.despesas" title="Link to this heading">¶</a></h2>
+<p>Módulo de despesas: adicionar, consultar, editar e eliminar despesas.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.despesas.adicionar_despesa">
 <span class="sig-prename descclassname"><span class="pre">src.despesas.</span></span><span class="sig-name descname"><span class="pre">adicionar_despesa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.despesas.adicionar_despesa" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Pede e valida os dados de uma despesa, guarda-os e mostra o orçamento restante.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.despesas.consultar_despesas">
 <span class="sig-prename descclassname"><span class="pre">src.despesas.</span></span><span class="sig-name descname"><span class="pre">consultar_despesas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.despesas.consultar_despesas" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Mostra as despesas registadas com o seu ID e restantes dados.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.despesas.editar_despesa">
 <span class="sig-prename descclassname"><span class="pre">src.despesas.</span></span><span class="sig-name descname"><span class="pre">editar_despesa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.despesas.editar_despesa" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Edita uma despesa pelo ID, mantendo os valores dos campos deixados vazios.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.despesas.eliminar_despesa">
 <span class="sig-prename descclassname"><span class="pre">src.despesas.</span></span><span class="sig-name descname"><span class="pre">eliminar_despesa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.despesas.eliminar_despesa" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Elimina uma despesa pelo ID, após confirmação, e guarda a alteração.</p>
+</dd></dl>
 
 </section>
 <section id="module-src.login">
@@ -235,6 +240,24 @@ Nas seguintes, pede a palavra-passe com um máximo de 3 tentativas.</p>
 <span id="src-pesquisa-module"></span><h2>src.pesquisa module<a class="headerlink" href="#module-src.pesquisa" title="Link to this heading">¶</a></h2>
 <p>Módulo de pesquisa: procurar, filtrar e resumir despesas.</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="src.pesquisa.categorias_disponiveis">
+<span class="sig-prename descclassname"><span class="pre">src.pesquisa.</span></span><span class="sig-name descname"><span class="pre">categorias_disponiveis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pesquisa.categorias_disponiveis" title="Link to this definition">¶</a></dt>
+<dd><p>Junta as categorias registadas com as usadas nas despesas.</p>
+<p>Não repete categorias que só diferem nas maiúsculas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> (<em>dict</em>) – Dicionário completo de dados.</p>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Categorias por ordem alfabética.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="src.pesquisa.filtrar_por_categoria">
 <span class="sig-prename descclassname"><span class="pre">src.pesquisa.</span></span><span class="sig-name descname"><span class="pre">filtrar_por_categoria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">despesas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categoria</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pesquisa.filtrar_por_categoria" title="Link to this definition">¶</a></dt>
 <dd><p>Devolve as despesas que pertencem à categoria indicada.</p>
@@ -248,6 +271,26 @@ Nas seguintes, pede a palavra-passe com um máximo de 3 tentativas.</p>
 </dd>
 <dt class="field-even">Retorno<span class="colon">:</span></dt>
 <dd class="field-even"><p>Despesas dessa categoria (pode ser uma lista vazia).</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.pesquisa.filtrar_por_mes">
+<span class="sig-prename descclassname"><span class="pre">src.pesquisa.</span></span><span class="sig-name descname"><span class="pre">filtrar_por_mes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">despesas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pesquisa.filtrar_por_mes" title="Link to this definition">¶</a></dt>
+<dd><p>Devolve as despesas de um mês, aceitando os dois formatos de data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>despesas</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de despesas.</p></li>
+<li><p><strong>mes</strong> (<em>str</em>) – Mês no formato AAAA-MM.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Despesas desse mês (pode ser uma lista vazia).</p>
 </dd>
 <dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[dict]</p>
@@ -423,63 +466,146 @@ sem escrever nada cancela a operação.</p>
 <dt class="sig sig-object py" id="src.saldo.aviso_saldo_baixo">
 <span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">aviso_saldo_baixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.aviso_saldo_baixo" title="Link to this definition">¶</a></dt>
 <dd><p>Mostra um aviso se o dinheiro estiver a acabar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> (<em>dict</em>) – Dicionário completo de dados (resultado de dados.carregar()).</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.saldo.consultar_resumo_mensal">
 <span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">consultar_resumo_mensal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.consultar_resumo_mensal" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Pede um mês e mostra o respetivo resumo.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.saldo.definir_limite_mensal">
 <span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">definir_limite_mensal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.definir_limite_mensal" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Define o limite mensal de gastos.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.saldo.estado_saldo">
 <span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">estado_saldo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total_rendimentos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saldo</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.estado_saldo" title="Link to this definition">¶</a></dt>
 <dd><p>Classifica o estado do saldo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>total_rendimentos</strong> (<em>float</em>) – Soma de todos os rendimentos.</p></li>
+<li><p><strong>saldo</strong> (<em>float</em>) – Saldo atual (rendimentos menos despesas).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>“negativo”, “baixo” (resta menos de LIMITE_AVISO do que se
+recebeu) ou “ok”.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.saldo.menu_saldo">
 <span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">menu_saldo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.menu_saldo" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Mostra o menu de saldo, histórico e limite mensal.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.saldo.mes_da_data">
 <span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">mes_da_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texto</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.mes_da_data" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Extrai o mês (AAAA-MM) de uma data escrita num dos formatos aceites.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>texto</strong> (<em>str</em>) – Data, por exemplo “2026-11-05” ou “05-11-2026”.</p>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>O mês no formato AAAA-MM, ou None se a data for inválida.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str | None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.saldo.mostrar_historico">
 <span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">mostrar_historico</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.mostrar_historico" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Mostra o histórico mensal de rendimentos, despesas e saldo.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.saldo.mostrar_limite_restante">
 <span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">mostrar_limite_restante</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.mostrar_limite_restante" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Mostra o limite de gastos restante do mês atual.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.saldo.mostrar_saldo_total">
 <span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">mostrar_saldo_total</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.mostrar_saldo_total" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Mostra o saldo total de todos os registos.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.saldo.resumo_de_um_mes">
 <span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">resumo_de_um_mes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendimentos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">despesas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.resumo_de_um_mes" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Devolve o resumo de um mês específico.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rendimentos</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de rendimentos.</p></li>
+<li><p><strong>despesas</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de despesas.</p></li>
+<li><p><strong>mes</strong> (<em>str</em>) – Mês no formato AAAA-MM.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Resumo do mês; com zeros se não houver registos.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.saldo.resumo_mensal">
 <span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">resumo_mensal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendimentos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">despesas</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.resumo_mensal" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calcula rendimentos, despesas e saldo de cada mês.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rendimentos</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de rendimentos.</p></li>
+<li><p><strong>despesas</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de despesas.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Um dicionário por mês, por ordem cronológica, com as
+chaves “mes”, “rendimentos”, “despesas” e “saldo”.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[dict]</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.saldo.total_por_mes">
 <span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">total_por_mes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registos</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.total_por_mes" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Soma os valores dos registos agrupados por mês.</p>
+<p>Registos com data inválida são ignorados.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>registos</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Registos com as chaves “valor” e “data”.</p>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Total por mês, por exemplo {“2026-11”: 850.5}.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, float]</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-src.subscricoes">
