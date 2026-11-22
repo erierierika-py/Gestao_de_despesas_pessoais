@@ -1,9 +1,13 @@
+"""Módulo de despesas: adicionar, consultar, editar e eliminar despesas."""
+
+import math
+from datetime import datetime
 
 from .dados import carregar, guardar, proximo_id
 from .saldo import mostrar_limite_restante
+from .utilitarios import confirmar
 
-
-# Issue 1
+FORMATO_DATA = "%Y-%m-%d"
 
 def adicionar_despesa():
     print("\nAdicionar Despesa")
@@ -36,7 +40,15 @@ def adicionar_despesa():
         else:
             break
 
-    data = input("Data (DD-MM-AAAA): ").strip()
+    while True:
+        data = input("Data (AAAA-MM-DD): ").strip()
+
+        try:
+            datetime.strptime(data, FORMATO_DATA)
+            break
+
+        except ValueError:
+            print("Erro: A data não é válida, tenta novamente")
 
     dados = carregar()
 
@@ -56,8 +68,6 @@ def adicionar_despesa():
     mostrar_limite_restante()
 
 
-# Issue 2
-
 def consultar_despesas():
     dados = carregar()
     despesas = dados["despesas"]
@@ -75,8 +85,6 @@ def consultar_despesas():
         print("Categoria:", despesa["categoria"])
         print("Data:", despesa["data"])
 
-
-# Issue 3
 
 def editar_despesa():
     dados = carregar()
@@ -152,8 +160,6 @@ def editar_despesa():
 
     print("\nDespesa editada com sucesso!")
 
-
-# Issue 4
 
 def eliminar_despesa():
     dados = carregar()
