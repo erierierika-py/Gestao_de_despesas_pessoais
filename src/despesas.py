@@ -1,13 +1,18 @@
-"""Funções para adicionar, consultar, editar e eliminar despesas."""
+
+"""Módulo de despesas: adicionar, consultar, editar e eliminar despesas."""
+
+import math
+from datetime import datetime
 
 from .dados import carregar, guardar, proximo_id
 from .saldo import mostrar_limite_restante
+from .utilitarios import confirmar
 
+FORMATO_DATA = "%Y-%m-%d"
 
-# Issue 1
 
 def adicionar_despesa():
-    """Pede os dados de uma despesa, guarda-os e mostra o orçamento restante."""
+    """Pede e valida os dados de uma despesa, guarda-os e mostra o orçamento restante."""
     print("\nAdicionar Despesa")
 
     while True:
@@ -22,7 +27,7 @@ def adicionar_despesa():
         try:
             valor = float(input("Valor da despesa (€): ").replace(",", "."))
 
-            if valor <= 0:
+            if not math.isfinite(valor) or valor <= 0:
                 print("Erro: O numero tem de ser maior que zero")
             else:
                 break
@@ -38,7 +43,15 @@ def adicionar_despesa():
         else:
             break
 
-    data = input("Data (DD-MM-AAAA): ").strip()
+    while True:
+        data = input("Data (AAAA-MM-DD): ").strip()
+
+        try:
+            datetime.strptime(data, FORMATO_DATA)
+            break
+
+        except ValueError:
+            print("Erro: A data não é válida, tenta novamente")
 
     dados = carregar()
 
@@ -58,10 +71,8 @@ def adicionar_despesa():
     mostrar_limite_restante()
 
 
-# Issue 2
-
 def consultar_despesas():
-    """Mostra as despesas registadas com o seu ID e outros dados."""
+    """Mostra as despesas registadas com o seu ID e restantes dados."""
     dados = carregar()
     despesas = dados["despesas"]
 
@@ -79,10 +90,8 @@ def consultar_despesas():
         print("Data:", despesa["data"])
 
 
-# Issue 3
-
 def editar_despesa():
-    """Edita uma despesa pelo ID e mantém os campos deixados vazios."""
+    """Edita uma despesa pelo ID, mantendo os valores dos campos deixados vazios."""
     dados = carregar()
     despesas = dados["despesas"]
 
@@ -128,7 +137,7 @@ def editar_despesa():
         try:
             valor = float(valor_texto)
 
-            if valor <= 0:
+            if not math.isfinite(valor) or valor <= 0:
                 print("Erro: O numero tem de ser maior que zero")
             else:
                 break
@@ -138,7 +147,18 @@ def editar_despesa():
 
     categoria = input("Nova categoria: ").strip()
 
-    data = input("Nova data (DD-MM-AAAA): ").strip()
+    while True:
+        data = input("Nova data (AAAA-MM-DD): ").strip()
+
+        if data == "":
+            break
+
+        try:
+            datetime.strptime(data, FORMATO_DATA)
+            break
+
+        except ValueError:
+            print("Erro: A data não é válida, tenta novamente")
 
     if descricao != "":
         encontrada["descricao"] = descricao
@@ -157,10 +177,8 @@ def editar_despesa():
     print("\nDespesa editada com sucesso!")
 
 
-# Issue 4
-
 def eliminar_despesa():
-    """Elimina a despesa indicada pelo ID e guarda a alteração."""
+    """Elimina uma despesa pelo ID, após confirmação, e guarda a alteração."""
     dados = carregar()
     despesas = dados["despesas"]
 
@@ -186,6 +204,10 @@ def eliminar_despesa():
 
                 print("\nDescrição:", despesa["descricao"])
                 print("Valor:", despesa["valor"], "€")
+
+                if not confirmar("Eliminar esta despesa?"):
+                    print("Operação cancelada.")
+                    return
 
                 despesas.remove(despesa)
                 guardar(dados)
