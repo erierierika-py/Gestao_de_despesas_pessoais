@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="pt-PT" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>src &#8212; Documentação Gestor de Despesas Pessoais 1.0</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=94769bbb"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/translations.js?v=72787d97"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Pesquisar" href="search.html" />
+    <link rel="next" title="src package" href="src.html" />
+    <link rel="prev" title="Gestor de Despesas Pessoais documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="src">
+<h1>src<a class="headerlink" href="#src" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="src.html">src package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src.ajuda">src.ajuda module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.ajuda.mostrar_ajuda"><code class="docutils literal notranslate"><span class="pre">mostrar_ajuda()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src.backup">src.backup module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.backup.criar_backup"><code class="docutils literal notranslate"><span class="pre">criar_backup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.backup.listar_backups"><code class="docutils literal notranslate"><span class="pre">listar_backups()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.backup.mostrar_backups"><code class="docutils literal notranslate"><span class="pre">mostrar_backups()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.backup.restaurar_backup"><code class="docutils literal notranslate"><span class="pre">restaurar_backup()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src.dados">src.dados module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.dados.carregar"><code class="docutils literal notranslate"><span class="pre">carregar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.dados.guardar"><code class="docutils literal notranslate"><span class="pre">guardar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.dados.proximo_id"><code class="docutils literal notranslate"><span class="pre">proximo_id()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src.despesas">src.despesas module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.despesas.adicionar_despesa"><code class="docutils literal notranslate"><span class="pre">adicionar_despesa()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.despesas.consultar_despesas"><code class="docutils literal notranslate"><span class="pre">consultar_despesas()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.despesas.editar_despesa"><code class="docutils literal notranslate"><span class="pre">editar_despesa()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.despesas.eliminar_despesa"><code class="docutils literal notranslate"><span class="pre">eliminar_despesa()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src.login">src.login module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.login.criar_palavra_passe"><code class="docutils literal notranslate"><span class="pre">criar_palavra_passe()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.login.fazer_login"><code class="docutils literal notranslate"><span class="pre">fazer_login()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.login.gerar_hash"><code class="docutils literal notranslate"><span class="pre">gerar_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.login.gerar_salt"><code class="docutils literal notranslate"><span class="pre">gerar_salt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.login.verificar_palavra_passe"><code class="docutils literal notranslate"><span class="pre">verificar_palavra_passe()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src.pesquisa">src.pesquisa module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.pesquisa.categorias_disponiveis"><code class="docutils literal notranslate"><span class="pre">categorias_disponiveis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.pesquisa.filtrar_por_categoria"><code class="docutils literal notranslate"><span class="pre">filtrar_por_categoria()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.pesquisa.filtrar_por_mes"><code class="docutils literal notranslate"><span class="pre">filtrar_por_mes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.pesquisa.gasto_por_categoria"><code class="docutils literal notranslate"><span class="pre">gasto_por_categoria()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.pesquisa.menu_filtrar"><code class="docutils literal notranslate"><span class="pre">menu_filtrar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.pesquisa.menu_gasto_categoria"><code class="docutils literal notranslate"><span class="pre">menu_gasto_categoria()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.pesquisa.menu_pesquisar"><code class="docutils literal notranslate"><span class="pre">menu_pesquisar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.pesquisa.mostrar_despesas"><code class="docutils literal notranslate"><span class="pre">mostrar_despesas()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.pesquisa.pesquisar_por_descricao"><code class="docutils literal notranslate"><span class="pre">pesquisar_por_descricao()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src.poupanca">src.poupanca module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.poupanca.calcular_poupado"><code class="docutils literal notranslate"><span class="pre">calcular_poupado()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.poupanca.definir_objetivo"><code class="docutils literal notranslate"><span class="pre">definir_objetivo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.poupanca.menu_poupanca"><code class="docutils literal notranslate"><span class="pre">menu_poupanca()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.poupanca.mostrar_progresso"><code class="docutils literal notranslate"><span class="pre">mostrar_progresso()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src.rendimentos">src.rendimentos module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.rendimentos.alterar_rendimento"><code class="docutils literal notranslate"><span class="pre">alterar_rendimento()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.rendimentos.eliminar_rendimento"><code class="docutils literal notranslate"><span class="pre">eliminar_rendimento()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.rendimentos.listar_rendimentos"><code class="docutils literal notranslate"><span class="pre">listar_rendimentos()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.rendimentos.menu_rendimentos"><code class="docutils literal notranslate"><span class="pre">menu_rendimentos()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.rendimentos.registar_rendimento"><code class="docutils literal notranslate"><span class="pre">registar_rendimento()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src.saldo">src.saldo module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.saldo.aviso_saldo_baixo"><code class="docutils literal notranslate"><span class="pre">aviso_saldo_baixo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.saldo.consultar_resumo_mensal"><code class="docutils literal notranslate"><span class="pre">consultar_resumo_mensal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.saldo.definir_limite_mensal"><code class="docutils literal notranslate"><span class="pre">definir_limite_mensal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.saldo.estado_saldo"><code class="docutils literal notranslate"><span class="pre">estado_saldo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.saldo.menu_saldo"><code class="docutils literal notranslate"><span class="pre">menu_saldo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.saldo.mes_da_data"><code class="docutils literal notranslate"><span class="pre">mes_da_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.saldo.mostrar_historico"><code class="docutils literal notranslate"><span class="pre">mostrar_historico()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.saldo.mostrar_limite_restante"><code class="docutils literal notranslate"><span class="pre">mostrar_limite_restante()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.saldo.mostrar_saldo_total"><code class="docutils literal notranslate"><span class="pre">mostrar_saldo_total()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.saldo.resumo_de_um_mes"><code class="docutils literal notranslate"><span class="pre">resumo_de_um_mes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.saldo.resumo_mensal"><code class="docutils literal notranslate"><span class="pre">resumo_mensal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.saldo.total_por_mes"><code class="docutils literal notranslate"><span class="pre">total_por_mes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src.subscricoes">src.subscricoes module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.subscricoes.adicionar_subscricao"><code class="docutils literal notranslate"><span class="pre">adicionar_subscricao()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.subscricoes.listar_subscricoes"><code class="docutils literal notranslate"><span class="pre">listar_subscricoes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.subscricoes.remover_subscricao"><code class="docutils literal notranslate"><span class="pre">remover_subscricao()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.subscricoes.total_mensal"><code class="docutils literal notranslate"><span class="pre">total_mensal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src.utilitarios">src.utilitarios module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.html#src.utilitarios.confirmar"><code class="docutils literal notranslate"><span class="pre">confirmar()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Gestor de Despesas Pessoais</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Ir" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navegação</h3>
+<p class="caption" role="heading"><span class="caption-text">Conteúdo:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">src</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src.html">src package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="capítulo anterior">Gestor de Despesas Pessoais documentation</a></li>
+      <li>Next: <a href="src.html" title="próximo capítulo">src package</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Dalila, Erika, Rodrigo.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.2.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/modules.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

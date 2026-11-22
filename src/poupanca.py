@@ -39,7 +39,7 @@ def calcular_poupado(d):
     Args:
         d: Dicionário completo de dados (resultado de dados.carregar()).
 
-    Devolve:
+    Returns:
         float: Valor poupado. Pode ser negativo se gastaste mais do que recebeste.
     """
     total_rendimentos = sum(r["valor"] for r in d["rendimentos"])

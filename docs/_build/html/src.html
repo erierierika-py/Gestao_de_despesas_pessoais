@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+
+<html lang="pt-PT" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>src package &#8212; Documentação Gestor de Despesas Pessoais 1.0</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=94769bbb"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/translations.js?v=72787d97"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Pesquisar" href="search.html" />
+    <link rel="prev" title="src" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="src-package">
+<h1>src package<a class="headerlink" href="#src-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-src.ajuda">
+<span id="src-ajuda-module"></span><h2>src.ajuda module<a class="headerlink" href="#module-src.ajuda" title="Link to this heading">¶</a></h2>
+<p>Módulo de ajuda: mostra instruções de utilização da aplicação.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.ajuda.mostrar_ajuda">
+<span class="sig-prename descclassname"><span class="pre">src.ajuda.</span></span><span class="sig-name descname"><span class="pre">mostrar_ajuda</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.ajuda.mostrar_ajuda" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra na consola as instruções de utilização, por secções.</p>
+</dd></dl>
+
+</section>
+<section id="module-src.backup">
+<span id="src-backup-module"></span><h2>src.backup module<a class="headerlink" href="#module-src.backup" title="Link to this heading">¶</a></h2>
+<p>Módulo de backup: criar, listar e restaurar cópias do ficheiro de dados.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.backup.criar_backup">
+<span class="sig-prename descclassname"><span class="pre">src.backup.</span></span><span class="sig-name descname"><span class="pre">criar_backup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.backup.criar_backup" title="Link to this definition">¶</a></dt>
+<dd><p>Cria uma cópia do ficheiro de dados na pasta backups/.
+O nome do file inclui a data e a hora.
+Se ainda não existirem dados, mostra mensagem e não faz nada.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.backup.listar_backups">
+<span class="sig-prename descclassname"><span class="pre">src.backup.</span></span><span class="sig-name descname"><span class="pre">listar_backups</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.backup.listar_backups" title="Link to this definition">¶</a></dt>
+<dd><p>Devolve a lista de backups existentes, do mais recente para o mais antigo.
+:returns: Nomes dos ficheiros de backup.
+:rtype: list[str]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.backup.mostrar_backups">
+<span class="sig-prename descclassname"><span class="pre">src.backup.</span></span><span class="sig-name descname"><span class="pre">mostrar_backups</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.backup.mostrar_backups" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra na consola os backups existentes, numerados.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.backup.restaurar_backup">
+<span class="sig-prename descclassname"><span class="pre">src.backup.</span></span><span class="sig-name descname"><span class="pre">restaurar_backup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.backup.restaurar_backup" title="Link to this definition">¶</a></dt>
+<dd><p>Restaura um backup escolhido pelo utilizador, com confirmação.</p>
+<p>Substitui o ficheiro de dados atual pelo backup escolhido.</p>
+</dd></dl>
+
+</section>
+<section id="module-src.dados">
+<span id="src-dados-module"></span><h2>src.dados module<a class="headerlink" href="#module-src.dados" title="Link to this heading">¶</a></h2>
+<p>Módulo partilhado para ler e guardar os dados da aplicação em JSON.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.dados.carregar">
+<span class="sig-prename descclassname"><span class="pre">src.dados.</span></span><span class="sig-name descname"><span class="pre">carregar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dados.carregar" title="Link to this definition">¶</a></dt>
+<dd><p>Lê os dados do ficheiro JSON.</p>
+<p>Se o ficheiro não existir ou estiver corrompido, devolve a estrutura inicial vazia.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Todos os dados da aplicação.</p>
+</dd>
+<dt class="field-even">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.dados.guardar">
+<span class="sig-prename descclassname"><span class="pre">src.dados.</span></span><span class="sig-name descname"><span class="pre">guardar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dados</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dados.guardar" title="Link to this definition">¶</a></dt>
+<dd><p>Guarda os dados no ficheiro JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dados</strong> (<em>dict</em>) – Estrutura completa a guardar.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.dados.proximo_id">
+<span class="sig-prename descclassname"><span class="pre">src.dados.</span></span><span class="sig-name descname"><span class="pre">proximo_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lista</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dados.proximo_id" title="Link to this definition">¶</a></dt>
+<dd><p>Devolve o próximo id livre para uma lista de dicionários com campo “id”.</p>
+</dd></dl>
+
+</section>
+<section id="module-src.despesas">
+<span id="src-despesas-module"></span><h2>src.despesas module<a class="headerlink" href="#module-src.despesas" title="Link to this heading">¶</a></h2>
+<p>Módulo de despesas: adicionar, consultar, editar e eliminar despesas.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.despesas.adicionar_despesa">
+<span class="sig-prename descclassname"><span class="pre">src.despesas.</span></span><span class="sig-name descname"><span class="pre">adicionar_despesa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.despesas.adicionar_despesa" title="Link to this definition">¶</a></dt>
+<dd><p>Pede e valida os dados de uma despesa, guarda-os e mostra o orçamento restante.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.despesas.consultar_despesas">
+<span class="sig-prename descclassname"><span class="pre">src.despesas.</span></span><span class="sig-name descname"><span class="pre">consultar_despesas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.despesas.consultar_despesas" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra as despesas registadas com o seu ID e restantes dados.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.despesas.editar_despesa">
+<span class="sig-prename descclassname"><span class="pre">src.despesas.</span></span><span class="sig-name descname"><span class="pre">editar_despesa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.despesas.editar_despesa" title="Link to this definition">¶</a></dt>
+<dd><p>Edita uma despesa pelo ID, mantendo os valores dos campos deixados vazios.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.despesas.eliminar_despesa">
+<span class="sig-prename descclassname"><span class="pre">src.despesas.</span></span><span class="sig-name descname"><span class="pre">eliminar_despesa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.despesas.eliminar_despesa" title="Link to this definition">¶</a></dt>
+<dd><p>Elimina uma despesa pelo ID, após confirmação, e guarda a alteração.</p>
+</dd></dl>
+
+</section>
+<section id="module-src.login">
+<span id="src-login-module"></span><h2>src.login module<a class="headerlink" href="#module-src.login" title="Link to this heading">¶</a></h2>
+<p>Módulo de login: criar e verificar a palavra-passe da aplicação.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.login.criar_palavra_passe">
+<span class="sig-prename descclassname"><span class="pre">src.login.</span></span><span class="sig-name descname"><span class="pre">criar_palavra_passe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.login.criar_palavra_passe" title="Link to this definition">¶</a></dt>
+<dd><p>Pede ao utilizador para criar uma palavra-passe e guarda-a (só o hash).</p>
+<p>A palavra-passe tem de ter pelo menos 4 caracteres e tem de ser
+confirmada. Se o utilizador carregar em Enter sem escrever nada,
+a operação é cancelada.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True se a palavra-passe foi criada, False se foi cancelada.</p>
+</dd>
+<dt class="field-even">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.login.fazer_login">
+<span class="sig-prename descclassname"><span class="pre">src.login.</span></span><span class="sig-name descname"><span class="pre">fazer_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.login.fazer_login" title="Link to this definition">¶</a></dt>
+<dd><p>Faz o login do utilizador no arranque da aplicação.</p>
+<p>Na primeira execução (sem palavra-passe guardada), pede para criar uma.
+Nas seguintes, pede a palavra-passe com um máximo de 3 tentativas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True se o utilizador pode entrar, False caso contrário.</p>
+</dd>
+<dt class="field-even">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.login.gerar_hash">
+<span class="sig-prename descclassname"><span class="pre">src.login.</span></span><span class="sig-name descname"><span class="pre">gerar_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">palavra_passe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.login.gerar_hash" title="Link to this definition">¶</a></dt>
+<dd><p>Calcula o hash SHA-256 da palavra-passe junto com o salt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>palavra_passe</strong> (<em>str</em>) – Palavra-passe em texto.</p></li>
+<li><p><strong>salt</strong> (<em>str</em>) – Texto aleatório que torna o hash único.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Hash em hexadecimal (64 caracteres).</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.login.gerar_salt">
+<span class="sig-prename descclassname"><span class="pre">src.login.</span></span><span class="sig-name descname"><span class="pre">gerar_salt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.login.gerar_salt" title="Link to this definition">¶</a></dt>
+<dd><p>Gera um salt aleatório (texto) para juntar à palavra-passe.</p>
+<dl class="simple">
+<dt>Devolve:</dt><dd><p>str: Salt com 32 caracteres hexadecimais.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.login.verificar_palavra_passe">
+<span class="sig-prename descclassname"><span class="pre">src.login.</span></span><span class="sig-name descname"><span class="pre">verificar_palavra_passe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">palavra_passe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.login.verificar_palavra_passe" title="Link to this definition">¶</a></dt>
+<dd><p>Verifica se a palavra-passe corresponde à que está guardada.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>palavra_passe</strong> (<em>str</em>) – Palavra-passe escrita pelo utilizador.</p></li>
+<li><p><strong>d</strong> (<em>dict</em>) – Dicionário completo de dados (resultado de dados.carregar()).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>True se corresponder, False se não corresponder ou se</dt><dd><p>ainda não existir palavra-passe guardada.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.pesquisa">
+<span id="src-pesquisa-module"></span><h2>src.pesquisa module<a class="headerlink" href="#module-src.pesquisa" title="Link to this heading">¶</a></h2>
+<p>Módulo de pesquisa: procurar, filtrar e resumir despesas.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.pesquisa.categorias_disponiveis">
+<span class="sig-prename descclassname"><span class="pre">src.pesquisa.</span></span><span class="sig-name descname"><span class="pre">categorias_disponiveis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pesquisa.categorias_disponiveis" title="Link to this definition">¶</a></dt>
+<dd><p>Junta as categorias registadas com as usadas nas despesas.</p>
+<p>Não repete categorias que só diferem nas maiúsculas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> (<em>dict</em>) – Dicionário completo de dados.</p>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Categorias por ordem alfabética.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.pesquisa.filtrar_por_categoria">
+<span class="sig-prename descclassname"><span class="pre">src.pesquisa.</span></span><span class="sig-name descname"><span class="pre">filtrar_por_categoria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">despesas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categoria</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pesquisa.filtrar_por_categoria" title="Link to this definition">¶</a></dt>
+<dd><p>Devolve as despesas que pertencem à categoria indicada.</p>
+<p>A comparação não distingue maiúsculas de minúsculas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>despesas</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de despesas.</p></li>
+<li><p><strong>categoria</strong> (<em>str</em>) – Nome da categoria a filtrar.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Despesas dessa categoria (pode ser uma lista vazia).</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.pesquisa.filtrar_por_mes">
+<span class="sig-prename descclassname"><span class="pre">src.pesquisa.</span></span><span class="sig-name descname"><span class="pre">filtrar_por_mes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">despesas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pesquisa.filtrar_por_mes" title="Link to this definition">¶</a></dt>
+<dd><p>Devolve as despesas de um mês, aceitando os dois formatos de data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>despesas</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de despesas.</p></li>
+<li><p><strong>mes</strong> (<em>str</em>) – Mês no formato AAAA-MM.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Despesas desse mês (pode ser uma lista vazia).</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.pesquisa.gasto_por_categoria">
+<span class="sig-prename descclassname"><span class="pre">src.pesquisa.</span></span><span class="sig-name descname"><span class="pre">gasto_por_categoria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">despesas</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pesquisa.gasto_por_categoria" title="Link to this definition">¶</a></dt>
+<dd><p>Soma as despesas de cada categoria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>despesas</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de despesas.</p>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Categoria -&gt; total gasto, ordenado da categoria com mais</dt><dd><p>gastos para a com menos.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.pesquisa.menu_filtrar">
+<span class="sig-prename descclassname"><span class="pre">src.pesquisa.</span></span><span class="sig-name descname"><span class="pre">menu_filtrar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pesquisa.menu_filtrar" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra as categorias, pede uma escolha e lista as despesas dessa categoria.</p>
+<p>No fim mostra o total gasto na categoria. Se a escolha for inválida
+ou a categoria não tiver despesas, avisa o utilizador.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.pesquisa.menu_gasto_categoria">
+<span class="sig-prename descclassname"><span class="pre">src.pesquisa.</span></span><span class="sig-name descname"><span class="pre">menu_gasto_categoria</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pesquisa.menu_gasto_categoria" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra o gasto por categoria, com valor e percentagem do total.</p>
+<p>Pergunta ao utilizador se quer ver um mês específico (AAAA-MM)
+ou todos. Se não houver despesas, avisa.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.pesquisa.menu_pesquisar">
+<span class="sig-prename descclassname"><span class="pre">src.pesquisa.</span></span><span class="sig-name descname"><span class="pre">menu_pesquisar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pesquisa.menu_pesquisar" title="Link to this definition">¶</a></dt>
+<dd><p>Pede um texto ao utilizador e mostra as despesas que o contêm na descrição.</p>
+<p>Se o texto estiver vazio, a operação é cancelada. Se não houver
+resultados, avisa o utilizador.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.pesquisa.mostrar_despesas">
+<span class="sig-prename descclassname"><span class="pre">src.pesquisa.</span></span><span class="sig-name descname"><span class="pre">mostrar_despesas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lista</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pesquisa.mostrar_despesas" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra uma tabela com as despesas recebidas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lista</strong> – Despesas a mostrar (cada uma com id, descricao,
+valor, categoria e data).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.pesquisa.pesquisar_por_descricao">
+<span class="sig-prename descclassname"><span class="pre">src.pesquisa.</span></span><span class="sig-name descname"><span class="pre">pesquisar_por_descricao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">despesas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texto</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pesquisa.pesquisar_por_descricao" title="Link to this definition">¶</a></dt>
+<dd><p>Devolve as despesas cuja descrição contém o texto indicado.
+A pesquisa não distingue maiúsculas de minúsculas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>despesas</strong> – Lista de despesas.</p></li>
+<li><p><strong>texto</strong> – Texto a procurar na descrição.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Despesas que contêm o texto (pode ser uma lista vazia).</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.poupanca">
+<span id="src-poupanca-module"></span><h2>src.poupanca module<a class="headerlink" href="#module-src.poupanca" title="Link to this heading">¶</a></h2>
+<p>Módulo de poupança: objetivo, valor poupado e progresso.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.poupanca.calcular_poupado">
+<span class="sig-prename descclassname"><span class="pre">src.poupanca.</span></span><span class="sig-name descname"><span class="pre">calcular_poupado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.poupanca.calcular_poupado" title="Link to this definition">¶</a></dt>
+<dd><p>Calcula o valor poupado: total de rendimentos menos total de despesas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Dicionário completo de dados (resultado de dados.carregar()).</p>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Valor poupado. Pode ser negativo se gastaste mais do que recebeste.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.poupanca.definir_objetivo">
+<span class="sig-prename descclassname"><span class="pre">src.poupanca.</span></span><span class="sig-name descname"><span class="pre">definir_objetivo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.poupanca.definir_objetivo" title="Link to this definition">¶</a></dt>
+<dd><p>Pede um valor ao utilizador e guarda-o como objetivo de poupança.</p>
+<p>O valor tem de ser um número maior que 0. Se o utilizador carregar
+em Enter sem escrever nada, a operação é cancelada.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.poupanca.menu_poupanca">
+<span class="sig-prename descclassname"><span class="pre">src.poupanca.</span></span><span class="sig-name descname"><span class="pre">menu_poupanca</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.poupanca.menu_poupanca" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra o submenu de poupança e executa a opção escolhida.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.poupanca.mostrar_progresso">
+<span class="sig-prename descclassname"><span class="pre">src.poupanca.</span></span><span class="sig-name descname"><span class="pre">mostrar_progresso</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.poupanca.mostrar_progresso" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra o progresso do objetivo de poupança.</p>
+<p>Mostra o valor poupado, o objetivo, a percentagem atingida e quanto falta.
+Se ainda não houver objetivo definido, avisa o utilizador.</p>
+</dd></dl>
+
+</section>
+<section id="module-src.rendimentos">
+<span id="src-rendimentos-module"></span><h2>src.rendimentos module<a class="headerlink" href="#module-src.rendimentos" title="Link to this heading">¶</a></h2>
+<p>Módulo de rendimentos: registar e listar rendimentos (salários e outros).</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.rendimentos.alterar_rendimento">
+<span class="sig-prename descclassname"><span class="pre">src.rendimentos.</span></span><span class="sig-name descname"><span class="pre">alterar_rendimento</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.rendimentos.alterar_rendimento" title="Link to this definition">¶</a></dt>
+<dd><p>Altera a descrição, o valor, a data ou o tipo de um rendimento.</p>
+<p>O utilizador escolhe o rendimento pelo id e depois o campo a alterar.
+Enter sem escrever nada cancela a alteração.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.rendimentos.eliminar_rendimento">
+<span class="sig-prename descclassname"><span class="pre">src.rendimentos.</span></span><span class="sig-name descname"><span class="pre">eliminar_rendimento</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.rendimentos.eliminar_rendimento" title="Link to this definition">¶</a></dt>
+<dd><p>Elimina um rendimento escolhido pelo id, depois de pedir confirmação.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.rendimentos.listar_rendimentos">
+<span class="sig-prename descclassname"><span class="pre">src.rendimentos.</span></span><span class="sig-name descname"><span class="pre">listar_rendimentos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.rendimentos.listar_rendimentos" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra na consola todos os rendimentos registados.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.rendimentos.menu_rendimentos">
+<span class="sig-prename descclassname"><span class="pre">src.rendimentos.</span></span><span class="sig-name descname"><span class="pre">menu_rendimentos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.rendimentos.menu_rendimentos" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra o submenu de rendimentos e executa a opção escolhida.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.rendimentos.registar_rendimento">
+<span class="sig-prename descclassname"><span class="pre">src.rendimentos.</span></span><span class="sig-name descname"><span class="pre">registar_rendimento</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.rendimentos.registar_rendimento" title="Link to this definition">¶</a></dt>
+<dd><p>Pede os dados ao utilizador e regista um novo rendimento.</p>
+<p>Guarda o rendimento na chave «rendimentos» do ficheiro de dados, com os
+campos id, descricao, valor, data e tipo. Em qualquer pergunta, Enter
+sem escrever nada cancela a operação.</p>
+</dd></dl>
+
+</section>
+<section id="module-src.saldo">
+<span id="src-saldo-module"></span><h2>src.saldo module<a class="headerlink" href="#module-src.saldo" title="Link to this heading">¶</a></h2>
+<p>Cálculos de saldo, totais mensais e histórico financeiro.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.saldo.aviso_saldo_baixo">
+<span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">aviso_saldo_baixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.aviso_saldo_baixo" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra um aviso se o dinheiro estiver a acabar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> (<em>dict</em>) – Dicionário completo de dados (resultado de dados.carregar()).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.saldo.consultar_resumo_mensal">
+<span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">consultar_resumo_mensal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.consultar_resumo_mensal" title="Link to this definition">¶</a></dt>
+<dd><p>Pede um mês e mostra o respetivo resumo.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.saldo.definir_limite_mensal">
+<span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">definir_limite_mensal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.definir_limite_mensal" title="Link to this definition">¶</a></dt>
+<dd><p>Define o limite mensal de gastos.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.saldo.estado_saldo">
+<span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">estado_saldo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total_rendimentos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saldo</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.estado_saldo" title="Link to this definition">¶</a></dt>
+<dd><p>Classifica o estado do saldo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>total_rendimentos</strong> (<em>float</em>) – Soma de todos os rendimentos.</p></li>
+<li><p><strong>saldo</strong> (<em>float</em>) – Saldo atual (rendimentos menos despesas).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>“negativo”, “baixo” (resta menos de LIMITE_AVISO do que se
+recebeu) ou “ok”.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.saldo.menu_saldo">
+<span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">menu_saldo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.menu_saldo" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra o menu de saldo, histórico e limite mensal.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.saldo.mes_da_data">
+<span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">mes_da_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texto</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.mes_da_data" title="Link to this definition">¶</a></dt>
+<dd><p>Extrai o mês (AAAA-MM) de uma data escrita num dos formatos aceites.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>texto</strong> (<em>str</em>) – Data, por exemplo “2026-11-05” ou “05-11-2026”.</p>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>O mês no formato AAAA-MM, ou None se a data for inválida.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.saldo.mostrar_historico">
+<span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">mostrar_historico</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.mostrar_historico" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra o histórico mensal de rendimentos, despesas e saldo.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.saldo.mostrar_limite_restante">
+<span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">mostrar_limite_restante</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.mostrar_limite_restante" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra o limite de gastos restante do mês atual.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.saldo.mostrar_saldo_total">
+<span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">mostrar_saldo_total</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.mostrar_saldo_total" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra o saldo total de todos os registos.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.saldo.resumo_de_um_mes">
+<span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">resumo_de_um_mes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendimentos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">despesas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.resumo_de_um_mes" title="Link to this definition">¶</a></dt>
+<dd><p>Devolve o resumo de um mês específico.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rendimentos</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de rendimentos.</p></li>
+<li><p><strong>despesas</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de despesas.</p></li>
+<li><p><strong>mes</strong> (<em>str</em>) – Mês no formato AAAA-MM.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Resumo do mês; com zeros se não houver registos.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.saldo.resumo_mensal">
+<span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">resumo_mensal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendimentos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">despesas</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.resumo_mensal" title="Link to this definition">¶</a></dt>
+<dd><p>Calcula rendimentos, despesas e saldo de cada mês.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rendimentos</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de rendimentos.</p></li>
+<li><p><strong>despesas</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de despesas.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Um dicionário por mês, por ordem cronológica, com as
+chaves “mes”, “rendimentos”, “despesas” e “saldo”.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.saldo.total_por_mes">
+<span class="sig-prename descclassname"><span class="pre">src.saldo.</span></span><span class="sig-name descname"><span class="pre">total_por_mes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registos</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.saldo.total_por_mes" title="Link to this definition">¶</a></dt>
+<dd><p>Soma os valores dos registos agrupados por mês.</p>
+<p>Registos com data inválida são ignorados.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>registos</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Registos com as chaves “valor” e “data”.</p>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Total por mês, por exemplo {“2026-11”: 850.5}.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.subscricoes">
+<span id="src-subscricoes-module"></span><h2>src.subscricoes module<a class="headerlink" href="#module-src.subscricoes" title="Link to this heading">¶</a></h2>
+<p>Módulo de subscrições: pagamentos regulares (Netflix, ginásio, renda…).</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.subscricoes.adicionar_subscricao">
+<span class="sig-prename descclassname"><span class="pre">src.subscricoes.</span></span><span class="sig-name descname"><span class="pre">adicionar_subscricao</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.subscricoes.adicionar_subscricao" title="Link to this definition">¶</a></dt>
+<dd><p>Pede os dados e adiciona uma subscrição ao ficheiro de dados.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.subscricoes.listar_subscricoes">
+<span class="sig-prename descclassname"><span class="pre">src.subscricoes.</span></span><span class="sig-name descname"><span class="pre">listar_subscricoes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.subscricoes.listar_subscricoes" title="Link to this definition">¶</a></dt>
+<dd><p>Mostra todas as subscrições e o total mensal.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.subscricoes.remover_subscricao">
+<span class="sig-prename descclassname"><span class="pre">src.subscricoes.</span></span><span class="sig-name descname"><span class="pre">remover_subscricao</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.subscricoes.remover_subscricao" title="Link to this definition">¶</a></dt>
+<dd><p>Remove uma subscrição escolhida pelo id, com confirmação.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.subscricoes.total_mensal">
+<span class="sig-prename descclassname"><span class="pre">src.subscricoes.</span></span><span class="sig-name descname"><span class="pre">total_mensal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subscricoes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.subscricoes.total_mensal" title="Link to this definition">¶</a></dt>
+<dd><p>Calcula o total mensal das subscrições.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>subscricoes</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – Lista de subscrições.</p>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>Soma dos valores.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.utilitarios">
+<span id="src-utilitarios-module"></span><h2>src.utilitarios module<a class="headerlink" href="#module-src.utilitarios" title="Link to this heading">¶</a></h2>
+<p>Funções utilitárias partilhadas por toda a aplicação.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utilitarios.confirmar">
+<span class="sig-prename descclassname"><span class="pre">src.utilitarios.</span></span><span class="sig-name descname"><span class="pre">confirmar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pergunta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utilitarios.confirmar" title="Link to this definition">¶</a></dt>
+<dd><p>Pede confirmação ao utilizador antes de uma ação irreversível.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pergunta</strong> (<em>str</em>) – Texto da pergunta a apresentar.</p>
+</dd>
+<dt class="field-even">Retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>True se o utilizador responder “s” ou “sim” (em maiúsculas
+ou minúsculas); False em qualquer outro caso.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<dl>
+<dt>Exemplo:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">confirmar</span><span class="p">(</span><span class="s2">&quot;Apagar este registo?&quot;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">apagar</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Gestor de Despesas Pessoais</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Ir" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navegação</h3>
+<p class="caption" role="heading"><span class="caption-text">Conteúdo:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">src package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">src</a><ul>
+      <li>Previous: <a href="modules.html" title="capítulo anterior">src</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Dalila, Erika, Rodrigo.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.2.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/src.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
