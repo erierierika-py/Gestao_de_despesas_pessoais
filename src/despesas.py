@@ -1,11 +1,17 @@
+"""Módulo de despesas: adicionar, consultar, editar e eliminar despesas."""
+
+import math
+from datetime import datetime
 
 from .dados import carregar, guardar, proximo_id
 from .saldo import mostrar_limite_restante
+from .utilitarios import confirmar
 
-
-# Issue 1
+FORMATO_DATA = "%Y-%m-%d"
 
 def adicionar_despesa():
+    """Pede os dados de uma despesa, valida-os e guarda-a."""
+
     print("\nAdicionar Despesa")
 
     while True:
@@ -20,7 +26,7 @@ def adicionar_despesa():
         try:
             valor = float(input("Valor da despesa (€): ").replace(",", "."))
 
-            if valor <= 0:
+            if not math.isfinite(valor) or valor <= 0:
                 print("Erro: O numero tem de ser maior que zero")
             else:
                 break
@@ -36,7 +42,15 @@ def adicionar_despesa():
         else:
             break
 
-    data = input("Data (DD-MM-AAAA): ").strip()
+    while True:
+        data = input("Data (AAAA-MM-DD): ").strip()
+
+        try:
+            datetime.strptime(data, FORMATO_DATA)
+            break
+
+        except ValueError:
+            print("Erro: A data não é válida, tenta novamente")
 
     dados = carregar()
 
@@ -56,9 +70,9 @@ def adicionar_despesa():
     mostrar_limite_restante()
 
 
-# Issue 2
-
 def consultar_despesas():
+    """Mostra na consola todas as despesas registadas."""
+
     dados = carregar()
     despesas = dados["despesas"]
 
@@ -76,9 +90,10 @@ def consultar_despesas():
         print("Data:", despesa["data"])
 
 
-# Issue 3
-
 def editar_despesa():
+    """Altera uma despesa escolhida pelo id.
+    Os campos deixados em branco mantêm o valor atual.
+    """
     dados = carregar()
     despesas = dados["despesas"]
 
@@ -124,7 +139,7 @@ def editar_despesa():
         try:
             valor = float(valor_texto)
 
-            if valor <= 0:
+            if not math.isfinite(valor) or valor <= 0:
                 print("Erro: O numero tem de ser maior que zero")
             else:
                 break
@@ -153,9 +168,8 @@ def editar_despesa():
     print("\nDespesa editada com sucesso!")
 
 
-# Issue 4
-
 def eliminar_despesa():
+    """Elimina uma despesa escolhida pelo id, depois de pedir confirmação."""
     dados = carregar()
     despesas = dados["despesas"]
 
@@ -181,6 +195,10 @@ def eliminar_despesa():
 
                 print("\nDescrição:", despesa["descricao"])
                 print("Valor:", despesa["valor"], "€")
+
+                if not confirmar("Eliminar esta despesa?"):
+                    print("Operação cancelada.")
+                    return
 
                 despesas.remove(despesa)
                 guardar(dados)
