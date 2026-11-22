@@ -1,6 +1,7 @@
 
 """Cálculos de saldo, totais mensais e histórico financeiro."""
 
+import math
 from datetime import datetime
 from src import dados
 from src.poupanca import calcular_poupado
@@ -109,7 +110,7 @@ def mostrar_saldo_total():
 
 
 def mostrar_historico():
-     """Mostra o histórico mensal de rendimentos, despesas e saldo."""
+    """Mostra o histórico mensal de rendimentos, despesas e saldo."""
     base = dados.carregar()
     resumo = resumo_mensal(base["rendimentos"], base["despesas"])
 
@@ -132,25 +133,28 @@ def definir_limite_mensal():
     base = dados.carregar()
 
     print("\nDefinir Limite Mensal")
-    print("Limite atual:", base["orcamento"]["limite_mensal"], "€")
+    print(f"Limite atual: {base['orcamento']['limite_mensal']:.2f}€")
 
     while True:
+        texto = input("Novo limite mensal em € (Enter para cancelar): ")
+        texto = texto.strip().replace(",", ".")
+        if not texto:
+            print("Operação cancelada.")
+            return
         try:
-            limite = float(input("Novo limite mensal (€): ").replace(",", "."))
-
-            if limite <= 0:
-                print("Erro: O limite tem de ser maior que zero")
-            else:
-                break
-
+            limite = float(texto)
         except ValueError:
-            print("Erro: Valor invalido, tenta novamente")
+            print("Erro: Valor inválido, tenta novamente")
+            continue
+        if not math.isfinite(limite) or limite <= 0:
+            print("Erro: O limite tem de ser um número maior que zero")
+            continue
+        break
 
     base["orcamento"]["limite_mensal"] = round(limite, 2)
     dados.guardar(base)
 
     print("\nLimite mensal guardado com sucesso!")
-
 
 # Verificar dinheiro restante
 
