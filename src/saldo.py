@@ -8,6 +8,7 @@ from src.poupanca import calcular_poupado
 # Aceita os dois formatos usados no grupo
 FORMATOS_DATA = ("%Y-%m-%d", "%d-%m-%Y")
 LIMITE_AVISO = 0.20  # avisa quando resta menos de 20% do que se recebeu
+PERTO_DO_LIMITE = 0.8  # avisa quando já se gastou 80% do limite mensal
 
 def mes_da_data(texto):
     """Extrai o mês de uma data válida."""
@@ -127,6 +128,7 @@ def mostrar_historico():
 # Limite de gastos mensal
 
 def definir_limite_mensal():
+    """Define o limite mensal de gastos."""
     base = dados.carregar()
 
     print("\nDefinir Limite Mensal")
@@ -153,6 +155,7 @@ def definir_limite_mensal():
 # Verificar dinheiro restante
 
 def mostrar_limite_restante():
+    """Mostra o limite de gastos restante do mês atual."""
     base = dados.carregar()
 
     limite = base["orcamento"]["limite_mensal"]
@@ -181,6 +184,7 @@ def mostrar_limite_restante():
 
 
 def menu_saldo():
+    """Mostra o menu de saldo, histórico e limite mensal."""
     while True:
         print("\n*** SALDO E HISTÓRICO ***")
         print("1. Saldo total")
