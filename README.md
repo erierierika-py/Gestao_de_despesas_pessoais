@@ -69,6 +69,10 @@ Gestao_de_despesas_pessoais/
 ├── requirements.txt
 ├── data/
 │   └── dados.json        # Dados da aplicação (criado automaticamente)
+├── docs/                 # Documentação Sphinx
+│   ├── conf.py           # Configuração do Sphinx
+│   ├── index.rst         # Página inicial da documentação
+│   └── _build/html/      # Documentação em HTML (abrir index.html)
 ├── src/
 │   ├── dados.py          # Ler e guardar o ficheiro JSON
 │   ├── login.py          # Login com palavra-passe (hash com salt)
@@ -183,5 +187,5 @@ python -m sphinx.ext.apidoc -o docs src
 | Membro | Contribuições |
 |---|---|
 | Erika | Backup, ajuda, subscrições, objetivo de poupança, pesquisa, filtro e gasto por categoria, login, testes |
-| Dalila | Rendimentos, saldo e histórico mensal, aviso de saldo baixo |
-| Rodrigo | Despesas (adicionar, consultar, editar, remover), limite de gastos mensal |
+| Dalila | Rendimentos, saldo e histórico mensal, aviso de saldo baixo, testes |
+| Rodrigo | CRUD (adicionar, consultar, editar, remover), limite de gastos mensal, mensagens de erro, wiki |
